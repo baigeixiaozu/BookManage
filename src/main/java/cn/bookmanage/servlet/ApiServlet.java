@@ -54,10 +54,11 @@ public class ApiServlet extends HttpServlet {
             Map<String, String> route = parsedURI.get(0);
 
             // 服务包
-            String basePkg = "cn.wecuit.service";
+            String basePkg = "cn.bookmanage.service";
             // 构造试图请求的类
             pkg = basePkg + "." + route.get("subPkg") + ".impl." + route.get("service") + "ServiceImpl";
 
+            // 从这里开始使用反射来自动创建类，以及调用方法
             // transfer method by reflection
             // 尝试加载请求的类
             Class<?> clazz = Class.forName(pkg);
@@ -65,7 +66,7 @@ public class ApiServlet extends HttpServlet {
             Constructor<?> construct = clazz.getConstructor(Map.class);
             // 创建实例对象
             Object obj = construct.newInstance(info);
-            // 尝试获取指定无参方法
+            // 尝试获取指定 "无参" 方法
             Method method = clazz.getMethod(route.get("action") + "Action");
             // 尝试调用 指定无参方法
             method.invoke(obj);
@@ -75,20 +76,20 @@ public class ApiServlet extends HttpServlet {
             e.printStackTrace();
 
             ja.put("errCode", 10404);
-            ja.put("errMsg", pkg + " - ClassNotFound");
+            ja.put("errMsg", pkg + " - 未找到指定类");
             response.getWriter().print(JsonUtil.obj2String(ja));
 
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             e.printStackTrace();
 
             ja.put("errCode", 10404);
-            ja.put("errMsg", e.getMessage());
+            ja.put("errMsg", e.getMessage() + "方法未找到，或其它异常");
             response.getWriter().print(JsonUtil.obj2String(ja));
         } catch (Exception e) {
             e.printStackTrace();
 
             ja.put("errCode", 10500);
-            ja.put("errMsg", e.getLocalizedMessage());
+            ja.put("errMsg", e.getLocalizedMessage() + "未知异常");
             response.getWriter().print(JsonUtil.obj2String(ja));
         }
 
