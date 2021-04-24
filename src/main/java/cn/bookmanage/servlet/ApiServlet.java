@@ -34,11 +34,6 @@ public class ApiServlet extends HttpServlet {
         String pkg = null;
         Map<String, Object> ja = new HashMap<>();
 
-        // info 用于存储请求信息
-        Map<String, Object> info = new HashMap<>();
-        info.put("request", request);
-        info.put("response", response);
-
         // 拦截API请求处理过程中产生的异常，确保客户端收到的数据格式为JSON。
         try {
             String uri = request.getServletPath() + ((null == request.getPathInfo())?"":request.getPathInfo());
@@ -49,7 +44,6 @@ public class ApiServlet extends HttpServlet {
             if(null == parsedURI) throw new RuntimeException("URI解析失败");
 
             Map<String, String> params = parsedURI.get(1);
-            info.put("param", params);
 
             Map<String, String> route = parsedURI.get(0);
 
@@ -63,11 +57,17 @@ public class ApiServlet extends HttpServlet {
             // 尝试加载请求的类
             Class<?> clazz = Class.forName(pkg);
             // 尝试获取 请求的类中 含有map参数的构造方法
-            Constructor<?> construct = clazz.getConstructor(Map.class);
+            Constructor<?> construct = clazz.getConstructor();
             // 创建实例对象
-            Object obj = construct.newInstance(info);
-            // 尝试获取指定 "无参" 方法
-            Method method = clazz.getMethod(route.get("action") + "Action");
+            Object obj = construct.newInstance();
+
+            // 尝试获取 初始化方法
+            Method method = clazz.getMethod("init", HttpServletRequest.class, HttpServletResponse.class, Map.class);
+            // 尝试调用 初始化方法
+            method.invoke(obj, request, response, params);
+
+            // 尝试获取 指定 "无参" 方法
+            method = clazz.getMethod(route.get("action") + "Action");
             // 尝试调用 指定无参方法
             method.invoke(obj);
 
