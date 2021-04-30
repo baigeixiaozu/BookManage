@@ -11,7 +11,7 @@ public class BaseServiceImpl implements IBaseService {
     protected HttpServletResponse response;
     protected Map<String, String> params;
 
-    public void init(HttpServletRequest request, HttpServletResponse response, Map<String, String> params){
+    public final void init(HttpServletRequest request, HttpServletResponse response, Map<String, String> params){
         this.request = request;
         this.response = response;
         this.params = params;

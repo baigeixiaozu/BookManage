@@ -1,5 +1,6 @@
 package cn.bookmanage.servlet;
 
+import cn.bookmanage.exception.BaseException;
 import cn.bookmanage.utils.ApiUtil;
 import cn.bookmanage.utils.JsonUtil;
 
@@ -33,6 +34,7 @@ public class ApiServlet extends HttpServlet {
 
         String pkg = null;
         Map<String, Object> ja = new HashMap<>();
+        boolean statusOK = false;
 
         // 拦截API请求处理过程中产生的异常，确保客户端收到的数据格式为JSON。
         try {
@@ -71,6 +73,7 @@ public class ApiServlet extends HttpServlet {
             // 尝试调用 指定无参方法
             method.invoke(obj);
 
+            statusOK = true;
         } catch (ClassNotFoundException e) {
             // TODO: errCode
             e.printStackTrace();
@@ -79,18 +82,30 @@ public class ApiServlet extends HttpServlet {
             ja.put("errMsg", pkg + " - 未找到指定类");
             response.getWriter().print(JsonUtil.obj2String(ja));
 
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-            e.printStackTrace();
+        } catch (NoSuchMethodException e){
 
             ja.put("errCode", 10404);
-            ja.put("errMsg", e.getMessage() + "方法未找到，或其它异常");
-            response.getWriter().print(JsonUtil.obj2String(ja));
-        } catch (Exception e) {
+            ja.put("errMsg", e.getLocalizedMessage() + "方法未找到");
+        }catch (InvocationTargetException e){
+
+            // 方式二
+            Throwable cause = e.getCause();
+            if (cause instanceof BaseException) {
+                BaseException cause1 = (BaseException) cause;
+
+                ja.put("errCode", cause1.getCode());
+                ja.put("errMsg", cause1.getMessage());
+            }else{
+                throw new RuntimeException(cause.getMessage());
+            }
+
+        }catch (Exception e) {
             e.printStackTrace();
 
             ja.put("errCode", 10500);
-            ja.put("errMsg", e.getLocalizedMessage() + "未知异常");
-            response.getWriter().print(JsonUtil.obj2String(ja));
+            ja.put("errMsg", e.getMessage() + "未知异常");
+        }finally {
+            if(!statusOK)response.getWriter().print(JsonUtil.obj2String(ja));
         }
 
     }
