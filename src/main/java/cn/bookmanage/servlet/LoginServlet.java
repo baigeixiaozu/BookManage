@@ -6,11 +6,14 @@ package cn.bookmanage.servlet; /**
 
 import cn.bookmanage.dao.UserDao;
 import cn.bookmanage.entity.User;
+import cn.bookmanage.utils.JsonUtil;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -24,17 +27,24 @@ public class LoginServlet extends HttpServlet {
 
         UserDao userDao = new UserDao();
         User user = userDao.checkUser(username, userpass);
+
+        Map<String, Object> ret = new HashMap<String, Object>(){{
+            put("code", 2000);
+        }};
+
         if(null != user){
             // 存在用户
             request.getSession().setAttribute("user", user);
             if(null != redirect)
-                response.sendRedirect(redirect);
+                ret.put("msg", redirect);
             else
-                System.out.println("登录成功");
-            return;
+                ret.put("msg", "user/info.jsp");
+        }else{
+            ret.put("code", 20403);
+            ret.put("msg", "登录失败！用户名或密码错误！");
         }
-        request.setAttribute("msg", "登录失败！用户名或密码错误！");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        response.setContentType("application/json");
+        response.getWriter().print(JsonUtil.obj2String(ret));
     }
 
     @Override
