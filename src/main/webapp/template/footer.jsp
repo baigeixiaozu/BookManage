@@ -11,7 +11,12 @@
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/common.js"></script>
     <footer>
-        这是页脚
+        <div class="footer-content">
+            这是页脚
+        </div>
+        <div class="foot-bar">
+            Copyright © 2016-2021 白给小组版权所有
+        </div>
     </footer>
 </body>
 </html>

@@ -18,11 +18,11 @@
     <header id="header">
         <nav id="header-nav" class="header-nav">
             <ul>
-                <li><a href="/">首页</a></li>
-                <li><a href="/">test</a></li>
+                <li><a href="index.jsp">首页</a></li>
+                <li><a href="">test</a></li>
             </ul>
         </nav>
-        <div>
+        <div class="right">
             <c:choose>
                 <c:when test="${sessionScope.user!=null}">
                     ${sessionScope.user.nickname}

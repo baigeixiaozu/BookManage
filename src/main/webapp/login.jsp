@@ -19,18 +19,32 @@
 <jsp:include page="template/header.jsp" >
     <jsp:param name="title" value="登录"/>
 </jsp:include>
-    <form id="uinfo" onsubmit="return false">
-        <label for="username">
-            用户名：<input id="username" name="username" type="text">
-        </label>
-        <br>
-        <label for="password">
-            密码：<input id="password" name="password" type="password">
-        </label>
-        <br>
-        <button onclick="login()">提交</button>
-        <button type="reset">重置</button>
-    </form>
+    <link rel="stylesheet" href="assets/css/login.css">
+    <div id="login-area" name="login-area">
+        <div class="left">
+            <image src="assets/img/login/loginbanner.png"></image>
+        </div>
+        <div class="right">
+            <form id="uinfo" onsubmit="return false">
+                <label for="username">
+                    用户名：
+                    <div class="input-area">
+                        <input id="username" name="username" type="text">
+                    </div>
+                </label>
+                <br>
+                <label for="password">
+                    密码：
+                    <div class="input-area">
+                        <input id="password" name="password" type="password">
+                    </div>
+                </label>
+                <br>
+                <button onclick="login()" class="login-btn">登录</button>
+                <!-- <button type="reset">重置</button> -->
+            </form>
+        </div>
+    </div>
     <script>
         function login(){
             Swal.fire({
