@@ -10,7 +10,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>${requestScope.title!=null?requestScope.title:"教材订购系统"} - 教材订购系统</title>
+    <title>${param.title!=null?param.title:"教材订购系统"} - 教材订购系统</title>
+    <base href="/BookManage/">
     <link rel="stylesheet" href="assets/css/common.css" />
 </head>
 <body>
@@ -27,7 +28,7 @@
                     ${sessionScope.user.nickname}
                 </c:when>
                 <c:otherwise>
-                    <a href="../login.jsp">登录</a>
+                    <a href="login.jsp">登录</a>
                 </c:otherwise>
             </c:choose>
         </div>

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="cn.bookmanage.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: jiyec
   Date: 2021/5/7
@@ -8,10 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false"%>
 <%
-    request.setAttribute("title", "登录");
+    User user = (User)request.getSession().getAttribute("user");
+    if(user != null){
+        // 已登录
+        String redirect = request.getParameter("redirect");
+        if(null == redirect)redirect = "user/info.jsp";
+        response.sendRedirect(redirect);
+    }
 %>
-<jsp:include page="template/header.jsp" />
-    <div style="color: red">${requestScope.msg!=null?requestScope.msg:''}</div>
+<jsp:include page="template/header.jsp" >
+    <jsp:param name="title" value="登录"/>
+</jsp:include>
     <form id="uinfo" onsubmit="return false">
         <label for="username">
             用户名：<input id="username" name="username" type="text">
