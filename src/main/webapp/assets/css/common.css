@@ -1,3 +1,9 @@
+body{
+    height: 100vh;
+    position:relative;
+    background-color: #F3F7F9;
+}
+
 #header{
     display: flex;
     flex-direction: row;

@@ -40,8 +40,8 @@
                     </div>
                 </label>
                 <br>
-                <button onclick="login()" class="login-btn">登录</button>
-                <!-- <button type="reset">重置</button> -->
+                <button onclick="login()" class="login-btn" >登录</button>
+                <button type="reset" class="login-btn" style="background-color: gray">重置</button>
             </form>
         </div>
     </div>
