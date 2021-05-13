@@ -44,4 +44,17 @@ public class UserServiceImpl extends APIServiceImpl implements IUserService {
         response.setContentType("application/json");
         response.getWriter().print(JsonUtil.obj2String(ret));
     }
+
+    @Override
+    public void logoutAction() throws IOException {
+        request.setAttribute("user", null);
+        request.getSession().invalidate();
+
+        Map<String, Object> ret = new HashMap<String, Object>(){{
+            put("code", 2000);
+        }};
+
+        response.setContentType("application/json");
+        response.getWriter().print(JsonUtil.obj2String(ret));
+    }
 }

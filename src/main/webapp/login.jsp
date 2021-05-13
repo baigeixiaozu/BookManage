@@ -40,54 +40,9 @@
                     </div>
                 </label>
                 <br>
-                <button onclick="login()" class="login-btn" >登录</button>
+                <button onclick="USER.login()" class="login-btn" >登录</button>
                 <button type="reset" class="login-btn" style="background-color: gray">重置</button>
             </form>
         </div>
     </div>
-    <script>
-        function login(){
-            Swal.fire({
-                title: '请稍等...',
-                icon: 'info',
-                html:
-                    '登录中...',
-                showCloseButton: false,
-                showCancelButton: false,
-                focusConfirm: false
-            })
-            // 发送 POST 请求
-            httpPost('LoginServlet', {
-                username: uinfo.username.value,
-                password: uinfo.password.value
-            })
-                .then(function (response) {
-                    console.log(response);
-
-                    Swal.fire({
-                        title: '登录成功！',
-                        icon: 'success',
-                        html: '准备跳转至' + response.msg,
-                        showCloseButton: false,
-                        showCancelButton: false,
-                        focusConfirm: false
-                    })
-
-                    location.href = response.msg;
-                })
-                .catch(function (error) {
-                    console.log("错误", error);
-
-                    Swal.fire({
-                        title: '登录失败！',
-                        icon: 'error',
-                        html: '<span style="color: red">' + error.msg + '</span>',
-                        showCloseButton: false,
-                        showCancelButton: false,
-                        focusConfirm: false,
-                        timer: 5000
-                    })
-                });
-        }
-    </script>
 <jsp:include page="template/footer.jsp" />

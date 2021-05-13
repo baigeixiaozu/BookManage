@@ -9,4 +9,5 @@ import java.io.IOException;
  **/
 public interface IUserService {
     void loginAction() throws IOException;
+    void logoutAction() throws IOException;
 }
