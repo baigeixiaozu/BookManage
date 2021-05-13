@@ -1,3 +1,6 @@
+*{
+    margin: 0;
+}
 body{
     height: 100vh;
     position:relative;
@@ -9,6 +12,7 @@ body{
     flex-direction: row;
     margin-bottom: 3rem;
     background-color: white;
+    height: 4rem;
 }
 #header-nav{
     flex: 1;
@@ -16,9 +20,12 @@ body{
 #header-nav > ul{
     display: flex;
     flex-direction: row;
+    height: 100%;
 }
 #header-nav > ul> li{
     padding: 0 1rem 0 1rem;
+    display: flex;
+    align-items: center;
 }
 #header > .right{
     display: flex;
@@ -27,7 +34,45 @@ body{
     margin-right: 2rem;
 }
 
-
+/*菜单*/
+#header .menu-list{
+    position: relative;
+    cursor: pointer;
+}
+#header .menu-list ul{
+    position: absolute;
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    align-items: center;
+    border-radius: 0 0 5px 5px;
+    top: 3rem;
+    left: 0;
+}
+#header .menu-list:hover{
+    background-color: #eee;
+}
+#header .menu-list:hover ul{
+    display: flex;
+}
+#header .menu-list ul>li{
+    padding: .5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#header .menu-list ul>li:hover{
+    background-color: #eee;
+}
+#header .menu-list-sub{
+    margin-top: 1rem;
+    background-color: #fff;
+    display: none;
+    overflow: hidden;
+}
+#header .menu-list-sub a{
+    color: black;
+}
 
 /* 页脚START */
 footer{

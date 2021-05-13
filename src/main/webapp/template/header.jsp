@@ -19,7 +19,20 @@
         <nav id="header-nav" class="header-nav">
             <ul>
                 <li><a id="index" href="index.jsp">首页</a></li>
-                <li><a href="">test</a></li>
+                <li class="menu-list">
+                    <span id="store">库存</span>
+                    <ul class="menu-list-sub">
+                        <li>
+                            <a href="store/queryAll.jsp" >全部</a>
+                        </li>
+                        <li>
+                            <a href="" >入库</a>
+                        </li>
+                        <li>
+                            <a href="" >出库</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <div class="right">
