@@ -1,31 +1,29 @@
-package cn.bookmanage.servlet; /**
- * @Author jiyec
- * @Date 2021/5/7 10:26
- * @Version 1.0
- **/
+package cn.bookmanage.service.api.impl;
 
+import cn.bookmanage.dao.UserDao;
 import cn.bookmanage.entity.User;
-import cn.bookmanage.service.impl.UserServiceImpl;
+import cn.bookmanage.service.api.IUserService;
+import cn.bookmanage.service.impl.APIServiceImpl;
 import cn.bookmanage.utils.JsonUtil;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "LoginServlet", value = "/LoginServlet")
-public class LoginServlet extends HttpServlet {
+/**
+ * @Author jiyec
+ * @Date 2021/5/13 10:54
+ * @Version 1.0
+ **/
+public class UserServiceImpl extends APIServiceImpl implements IUserService {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    public void loginAction() throws IOException {
         String username = request.getParameter("username");
         String userpass = request.getParameter("password");
         // 跳转地址
         String redirect = request.getParameter("redirect");
 
-        User user = new UserServiceImpl().login(username, userpass);
+        User user = new UserDao().checkUser(username, userpass);
 
         Map<String, Object> ret = new HashMap<String, Object>(){{
             put("code", 2000);
@@ -45,10 +43,5 @@ public class LoginServlet extends HttpServlet {
 
         response.setContentType("application/json");
         response.getWriter().print(JsonUtil.obj2String(ret));
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 }

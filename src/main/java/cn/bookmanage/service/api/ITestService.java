@@ -1,7 +1,7 @@
 package cn.bookmanage.service.api;
 
-import cn.bookmanage.service.IBaseService;
+import cn.bookmanage.service.IAPIService;
 
-public interface ITestService extends IBaseService {
+public interface ITestService extends IAPIService {
     void testAction();
 }
