@@ -38,6 +38,7 @@ body{
 #header .menu-list{
     position: relative;
     cursor: pointer;
+    color: rgba( 0, 0, 0, .5);
 }
 #header .menu-list ul{
     position: absolute;
@@ -51,6 +52,7 @@ body{
 }
 #header .menu-list:hover{
     background-color: #eee;
+    color: black;
 }
 #header .menu-list:hover ul{
     display: flex;

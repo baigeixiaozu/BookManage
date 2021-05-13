@@ -33,6 +33,20 @@
                         </li>
                     </ul>
                 </li>
+                <li class="menu-list">
+                    <span id="example">例子菜单</span>
+                    <ul class="menu-list-sub">
+                        <li>
+                            <a href="" >子项1</a>
+                        </li>
+                        <li>
+                            <a href="" >子项2</a>
+                        </li>
+                        <li>
+                            <a href="" >子项3</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <div class="right">
