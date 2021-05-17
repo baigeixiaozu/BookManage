@@ -7,6 +7,6 @@ import cn.bookmanage.entity.User;
  * @Date 2021/5/13 10:33
  * @Version 1.0
  **/
-public interface IUserService {
+public interface UserService {
     User login(String name, String pass);
 }

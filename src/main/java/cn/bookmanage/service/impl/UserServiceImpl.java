@@ -2,16 +2,14 @@ package cn.bookmanage.service.impl;
 
 import cn.bookmanage.dao.UserDao;
 import cn.bookmanage.entity.User;
-import cn.bookmanage.service.IUserService;
-
-import java.util.Map;
+import cn.bookmanage.service.UserService;
 
 /**
  * @Author jiyec
  * @Date 2021/5/13 10:36
  * @Version 1.0
  **/
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements UserService {
     /**
      * 用户登录服务
      *

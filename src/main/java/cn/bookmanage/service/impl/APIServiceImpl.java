@@ -1,12 +1,12 @@
 package cn.bookmanage.service.impl;
 
-import cn.bookmanage.service.IAPIService;
+import cn.bookmanage.service.APIService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
-public class APIServiceImpl implements IAPIService {
+public class APIServiceImpl implements APIService {
     protected HttpServletRequest request;
     protected HttpServletResponse response;
     protected Map<String, String> params;
