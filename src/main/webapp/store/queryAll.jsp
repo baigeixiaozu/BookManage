@@ -3,7 +3,9 @@
 <%@ page import="cn.bookmanage.service.StoreService" %>
 <%@ page import="cn.bookmanage.entity.Book" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %><%--
+<%@ page import="java.util.Map" %>
+<%@ page import="cn.bookmanage.entity.User" %>
+<%@ page import="java.net.URLEncoder" %><%--
   Created by IntelliJ IDEA.
   User: jiyec
   Date: 2021/5/13
@@ -13,21 +15,39 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 
-<%--TODO: 权限检查--%>
+<%--权限检查START--%>
+<%
+    User user = (User) request.getSession().getAttribute("user");
+    String req = request.getRequestURI();
+    String query = request.getQueryString();
+    String redirect = req + (query==null?"":"?"+query);
+
+    // URL编码,处理含参地址
+    redirect = URLEncoder.encode(redirect, "UTF-8");
+
+    if(user == null){
+        response.sendRedirect("../error/401.jsp?redirect=" + redirect);
+        return;
+    }
+%>
+<c:if test="${sessionScope.user.level!=10}">
+    <jsp:forward page="../error/403.jsp" />
+</c:if>
+<%--权限检查END--%>
+
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="查询库存"/>
 </jsp:include>
 
 <%
     String p = request.getParameter("page");
-    int pg = p==null?1:Integer.parseInt(p);
+    int curPage = p==null||p.length()==0?1:Integer.parseInt(p);
     int count = 10;
     StoreService ss = new StoreServiceImpl();
-    Map<String, Object> data = ss.queryAll(pg, count);
+    Map<String, Object> data = ss.queryAll(curPage, count);
     List<Book> books = (List<Book>)data.get("books");
     int total = (int)data.get("total");
-    pageContext.setAttribute("pageCnt", total/count + 1);
-    pageContext.setAttribute("books", books);
+    int pageCnt = total/count + 1;
 %>
 <link rel="stylesheet" href="assets/css/github-markdown.css">
 <article class="markdown-body">
@@ -45,7 +65,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${books}" var="book" varStatus="s">
+        <c:forEach items="<%=books%>" var="book" varStatus="s">
             <tr>
                 <td>${s.index+1}</td>
                 <td>${book.name}</td>
@@ -61,12 +81,12 @@
 
     <!--页码跳转-->
     <div class="page-nav">
-        <c:if test="${param.page-1>0}">
+        <c:if test="<%=curPage-1>0%>">
             <div>
-                <a href="store/queryAll.jsp?page=${param.page-1}">上一页</a>
+                <a href="store/queryAll.jsp?page=<%=curPage-1%>">上一页</a>
             </div>
         </c:if>
-        <c:forEach begin="1" end="${pageCnt}" varStatus="s">
+        <c:forEach begin="1" end="<%=pageCnt%>" varStatus="s">
             <div>
                 <c:if test="${param.page==s.index}">
                     <span>${s.index}</span>
@@ -76,9 +96,9 @@
                 </c:if>
             </div>
         </c:forEach>
-        <c:if test="${param.page!=pageCnt}">
+        <c:if test="<%=(curPage!=pageCnt)%>">
             <div>
-                <a href="store/queryAll.jsp?page=${param.page+1}">下一页</a>
+                <a href="store/queryAll.jsp?page=<%=curPage+1%>">下一页</a>
             </div>
         </c:if>
     </div>
