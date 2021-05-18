@@ -1,0 +1,118 @@
+*{
+    margin: 0;
+}
+body{
+    height: 100vh;
+    position:relative;
+    background-color: #F3F7F9;
+}
+
+#header{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3rem;
+    background-color: white;
+    height: 4rem;
+}
+#header .active{
+    color:black;
+}
+#header-nav{
+    flex: 1;
+}
+#header-nav > ul{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+#header-nav > ul> li{
+    padding: 0 1rem 0 1rem;
+    display: flex;
+    align-items: center;
+}
+#header > .right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2rem;
+}
+
+/*菜单*/
+#header .menu-list{
+    position: relative;
+    cursor: pointer;
+    color: rgba( 0, 0, 0, .5);
+}
+#header .menu-list ul{
+    position: absolute;
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    align-items: center;
+    border-radius: 0 0 5px 5px;
+    top: 3rem;
+    left: 0;
+}
+#header .menu-list:hover{
+    background-color: #eee;
+    color: black;
+}
+#header .menu-list:hover ul{
+    display: flex;
+}
+#header .menu-list ul>li{
+    padding: .5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#header .menu-list ul>li:hover{
+    background-color: #eee;
+}
+#header .menu-list-sub{
+    margin-top: 1rem;
+    background-color: #fff;
+    display: none;
+    overflow: hidden;
+}
+#header .menu-list-sub a{
+    color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-body{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center
+}
+
+/* 页脚START */
+footer{
+    margin-top: 3rem;
+    background-color: #eee;
+    color: black;
+    width: 100%;
+}
+footer > .footer-content{
+    padding: 3rem;
+
+}
+footer > .foot-bar{
+    text-align: center;
+    color: black;
+}
+
+/* 页脚END */
+ul > li{
+    display: block;
+}
+a {
+    text-decoration: none;
+    color: rgba(0,0,0,.5);
+}
+a:hover{
+    color: black;
+}

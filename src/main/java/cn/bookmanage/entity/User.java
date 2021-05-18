@@ -1,5 +1,8 @@
 package cn.bookmanage.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 用户实体
  *
@@ -7,6 +10,8 @@ package cn.bookmanage.entity;
  * @Date 2021/5/7 9:46
  * @Version 1.0
  **/
+@Getter
+@Setter
 public class User {
     // 用户id
     private int id;
@@ -23,49 +28,4 @@ public class User {
 
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        if(level == null)
-            this.level = 0;
-        this.level = Integer.parseInt(level);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 }
