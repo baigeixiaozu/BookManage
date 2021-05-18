@@ -6,11 +6,11 @@
 
   <groupId>cn.bookmanage</groupId>
   <artifactId>BookManage</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>war</packaging>
 
   <name>BookManage Maven Webapp</name>
-  <url>https://www.jysafe.cn</url>
+  <url>https://www.cuit.edu.cn</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

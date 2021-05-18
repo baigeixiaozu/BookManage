@@ -1,6 +1,7 @@
 package cn.bookmanage.dao;
 
 import cn.bookmanage.entity.Book;
+import cn.bookmanage.entity.StoreRecord;
 import cn.bookmanage.utils.JNDIUtils;
 
 import javax.naming.NamingException;
@@ -69,6 +70,65 @@ public class StoreDao {
         return new HashMap<String, Object>(){{
             put("books", books);
             put("total", finalTotal);
+        }};
+    }
+
+
+    /**
+     * 查询出入库
+     * @param page  页数
+     * @param count 分页大小
+     * @param type  类型[0入库|1出库]
+     * @return List -- [total, recordList]
+     */
+    public static List<Object> queryInOut(int page, int count, int type){
+        Connection connection = null;
+
+        String[] table = {"in", "out"};
+        List<StoreRecord> books = new LinkedList<>();
+        int total = 0;
+        try{
+            connection = JNDIUtils.getConnection();
+
+            String sql = "SELECT COUNT(1) FROM bm_" + table[type];
+            ResultSet rs = JNDIUtils.executeQuery(connection, sql, null);
+            while (rs.next()){
+                total = rs.getInt(1);
+            }
+            rs.close();
+
+            sql = "SELECT * FROM `bm_" + table[type] + "` LEFT JOIN bm_book ON bm_" + table[type] + ".book_id=bm_book.book_id LIMIT ?,?";
+            Integer[] p = new Integer[]{
+                    (page - 1) * count,
+                    count
+            };
+            rs = JNDIUtils.executeQuery(connection, sql, p);
+            while (rs.next()){
+                ResultSet finalRs = rs;
+                books.add(new StoreRecord(){{
+                    setId(finalRs.getLong(table[type] + "_id"));
+                    setName(finalRs.getString("book_name"));
+                    setCount(finalRs.getLong(table[type] + "_count"));
+                    setTime(finalRs.getString(table[type] + "_time"));
+                }});
+            }
+            rs.close();
+
+        } catch (SQLException | NamingException throwables) {
+            throwables.printStackTrace();
+        } finally{
+            if(null != connection) {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        int finalTotal = total;
+        return new LinkedList<Object>(){{
+            add(finalTotal);
+            add(books);
         }};
     }
 }

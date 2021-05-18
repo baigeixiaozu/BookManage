@@ -26,10 +26,10 @@
                             <a href="store/queryAll.jsp" >全部</a>
                         </li>
                         <li>
-                            <a href="" >入库</a>
+                            <a href="store/queryIn.jsp" >入库</a>
                         </li>
                         <li>
-                            <a href="" >出库</a>
+                            <a href="store/queryOut.jsp" >出库</a>
                         </li>
                     </ul>
                 </li>
