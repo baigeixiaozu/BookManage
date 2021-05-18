@@ -56,9 +56,10 @@ public class JNDIUtils {
 		ResultSet rs = null;
 		try {
 			pstmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-			for(int i=0; i < params.length; i++) {
-				pstmt.setObject(i + 1, params[i]);
-			}
+			if(null != params)
+				for(int i=0; i < params.length; i++) {
+					pstmt.setObject(i + 1, params[i]);
+				}
 			rs = pstmt.executeQuery();
 			return rs;
 		} catch (SQLException e) {
