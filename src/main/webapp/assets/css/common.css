@@ -14,6 +14,9 @@ body{
     background-color: white;
     height: 4rem;
 }
+#header .active{
+    color:black;
+}
 #header-nav{
     flex: 1;
 }
@@ -74,6 +77,16 @@ body{
 }
 #header .menu-list-sub a{
     color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main-body{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center
 }
 
 /* 页脚START */
@@ -102,7 +115,4 @@ a {
 }
 a:hover{
     color: black;
-}
-a.active{
-    color:black;
 }

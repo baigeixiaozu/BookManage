@@ -62,11 +62,15 @@
         </div>
         <script>
             let path = location.pathname;
+            console.log(path);
             if(path.includes("index.jsp"))
                 document.getElementById("index").classList.add("active")
+            else if(path.includes("store"))
+                document.getElementById("store").classList.add("active")
             else if(path.includes("user/info.jsp"))
                 document.getElementById("user-info-link").classList.add("active")
             else
                 document.getElementById("index").classList.add("active")
         </script>
     </header>
+    <section class="main-body">
