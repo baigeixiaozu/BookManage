@@ -19,13 +19,42 @@
 <html>
 <head>
     <title>This is Marketing System</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/MarketingSystem.css">
+    <script src="assets/js/MarketingSystem.js"></script>
 </head>
 <body>
-<div>
+<h1>Welcome to MarketingSystem!</h1>
 
-
-
-
+<div class="box">
+    <div>查询</div>
+    <div>发布通知</div>
+    <div>查看通知</div>
+    <div>提交订书单</div>
 </div>
-</body>
+<div class="box1">
+    <div class="item">
+        <ul>
+            <li>
+                <div>按书名查询</div>
+                <div>按作者查询</div>
+                <div>按ISBN查询</div>
+            </li>
+        </ul>
+    </div>
+    <div class="item">
+        请输入要提交的消息<input type="text">
+    </div>
+    <div class="item">消息栏</div>
+    <div class="item">
+        <select>
+            <option value="JSP实用教程（第4版）">JSP实用教程（第4版）</option>
+            <option value="计算机组成原理微课版">计算机组成原理微课版</option>
+            <option value="软件工程：实践者的研究方法（原书第8版）（本科教学版）">软件工程：实践者的研究方法（原书第8版）（本科教学版）</option>
+            <option value="web前端设计基础——html5、css3、java(二版)">web前端设计基础——html5、css3、java(二版)</option>
+            <option value="新目标大学英语系列教材：科技英语教程学生用书">新目标大学英语系列教材：科技英语教程学生用书</option>
+            <option value="概率论与数理统计及其应用（第2版）">概率论与数理统计及其应用（第2版）</option>
+        </select>数量：<input type="text">&nbsp;<input type="button" value="提交">
+    </div>
+</div>
+</body></body>
 </html>
