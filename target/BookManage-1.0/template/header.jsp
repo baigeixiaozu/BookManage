@@ -45,6 +45,10 @@
                         <li>
                             <a href="" >子项3</a>
                         </li>
+                        <li>
+                            <a href="MarketingSystem/queryMarketingSystem.jsp">销售系统</a>
+                        </li>
+
                     </ul>
                 </li>
             </ul>
