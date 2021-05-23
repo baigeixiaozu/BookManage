@@ -13,14 +13,15 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="cn.bookmanage.entity.User" %>
 <%@ page import="java.net.URLEncoder" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>This is Marketing System</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/MarketingSystem.css">
-    <script src="assets/js/MarketingSystem.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/MarketingSystem.css">
+    <script src="${pageContext.request.contextPath}/assets/js/MarketingSystem.js"></script>
 </head>
 <body>
 <h1>Welcome to MarketingSystem!</h1>
