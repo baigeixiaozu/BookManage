@@ -23,3 +23,8 @@ li{
 
     font-size: 20px;
 }
+
+.search {
+    border: #1b1f23;
+    padding: 10px;
+}
