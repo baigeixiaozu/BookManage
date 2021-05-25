@@ -16,9 +16,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-<<<<<<< HEAD
-
-=======
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%
     User user = (User) request.getSession().getAttribute("user");
@@ -40,7 +37,6 @@
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="销售系统"/>
 </jsp:include>
->>>>>>> origin/master
 <html>
 <head>
     <title>This is Marketing System</title>
