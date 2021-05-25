@@ -19,7 +19,7 @@
 <<<<<<< HEAD
 
 =======
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%--<%
     User user = (User) request.getSession().getAttribute("user");
     String req = request.getRequestURI();
