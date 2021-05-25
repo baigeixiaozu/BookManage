@@ -9,7 +9,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebFilter(filterName = "AllFilter", urlPatterns = {
-        "*"
+        "/*"
 })
 public class AllFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
