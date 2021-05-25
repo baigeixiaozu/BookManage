@@ -16,7 +16,31 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
+<<<<<<< HEAD
 
+=======
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%
+    User user = (User) request.getSession().getAttribute("user");
+    String req = request.getRequestURI();
+    String query = request.getQueryString();
+    String redirect = req + (query==null?"":"?"+query);
+
+    // URL编码,处理含参地址
+    redirect = URLEncoder.encode(redirect, "UTF-8");
+
+    if(user == null){
+        response.sendRedirect("../error/401.jsp?redirect=" + redirect);
+        return;
+    }
+%>--%>
+<%--<c:if test="${sessionScope.user.level!=10}">
+    <jsp:forward page="../error/403.jsp" />
+</c:if>--%>
+<jsp:include page="../template/header.jsp">
+    <jsp:param name="title" value="销售系统"/>
+</jsp:include>
+>>>>>>> origin/master
 <html>
 <head>
     <title>This is Marketing System</title>
@@ -42,9 +66,9 @@
     <div class="item">
         <ul>
             <li>
-                <div>按书名查询</div>
-                <div>按作者查询</div>
-                <div>按ISBN查询</div>
+                <div class="search"><a href="${pageContext.request.contextPath}/MarketingSystem/searchByName.jsp">按书名查询</a> </div>
+                <div class="search"><a href="${pageContext.request.contextPath}/MarketingSystem/searchByAuthor.jsp">按作者查询</a> </div>
+                <div class="search"><a href="${pageContext.request.contextPath}/MarketingSystem/searchByISBN.jsp">按ISBN查询</a> </div>
             </li>
         </ul>
     </div>
