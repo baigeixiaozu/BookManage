@@ -22,9 +22,10 @@ public class MarketingSystemServlet extends HttpServlet {
 
         String[] bookName=request.getParameterValues("bookName[]");
         String[] bookCount=request.getParameterValues("bookCount[]");
-
-
         OrderBookList user=new OrderBookList(bookName, bookCount);
+
+
+
         ObjectMapper mapper = new ObjectMapper(); //Jackson的核心类
         String json = mapper.writeValueAsString(user);
         System.out.println(json+"\n");
