@@ -16,9 +16,9 @@ $(function() {
             dataType: "json",
             success: function (data) {
                 var str = JSON.stringify(data);
-                alert("提交成功" + str);
+                alert("提交成功");
                 alert(data.bookName + "/" + data.bookCount);
-                $("#div1").html("<h2>" + str + "</h2>");
+            //    $("#div1").html("<h2>" + str + "</h2>");
             },
             error: function (data) {
                 alert("提交失败"+JSON.stringify(data));

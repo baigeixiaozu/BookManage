@@ -1,6 +1,8 @@
 package cn.bookmanage.servlet;
 
 import cn.bookmanage.entity.OrderBookList;
+import cn.bookmanage.service.MarketingSystem.InsertByNameService;
+import cn.bookmanage.service.MarketingSystem.InsertByNameService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.*;
@@ -25,10 +27,13 @@ public class MarketingSystemServlet extends HttpServlet {
         OrderBookList user=new OrderBookList(bookName, bookCount);
 
 
+        InsertByNameService.Insert(bookName,bookCount);
+
+
 
         ObjectMapper mapper = new ObjectMapper(); //Jackson的核心类
         String json = mapper.writeValueAsString(user);
-        System.out.println(json+"\n");
+      //  System.out.println(json+"\n");
 
         PrintWriter out = response.getWriter();
         out.print(json);

@@ -17,4 +17,8 @@ window.onload = function () {
             show[m].style.display = "none";
         }
     }
+    var Btn=document.getElementById("btn");
+    Btn.onclick=function (){
+        confirm("确定提交？");
+    }
 }
