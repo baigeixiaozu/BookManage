@@ -1,0 +1,28 @@
+h1{
+    text-align: center;
+}
+.box{
+    display: flex;
+    justify-content: space-around;
+}
+.box div{
+    font-size: 24px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: rgb(65, 163, 243);
+    padding: 10px;
+}
+li{
+    list-style: none;
+}
+.box1{
+    display: flex;
+    justify-content: center;
+}
+.item{
+
+    font-size: 20px;
+}
+#btn{
+    font-size: 20px;
+}
