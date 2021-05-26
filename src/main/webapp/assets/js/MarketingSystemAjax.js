@@ -11,7 +11,7 @@ $(function() {
         })
         $.ajax({
             type: "post",
-            url: "/BookManage_war_exploded/MarketingSystemServlet",
+            url: "/BookManage/MarketingSystemServlet",
             data: {"bookName":bookname, "bookCount":bookcount},
             dataType: "json",
             success: function (data) {
