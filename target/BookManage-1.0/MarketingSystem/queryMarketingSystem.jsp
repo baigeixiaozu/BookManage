@@ -83,7 +83,6 @@
             <li >软件工程：实践者的研究方法（原书第8版）（本科教学版）</li><input type="text" value="0">
             <li >web前端设计基础——html5、css3、java(二版)</li><input type="text" value="0">
             <li >新目标大学英语系列教材：科技英语教程学生用书</li><input type="text" value="0">
-            <li >JSP实用教程（第4版）</li><input type="text" value="0">
             <li >概率论与数理统计及其应用（第2版）</li><input type="text" value="0">
        </ul>
         <br>
