@@ -1,5 +1,6 @@
 package cn.bookmanage.entity;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class OrderBookList {
@@ -25,6 +26,14 @@ public class OrderBookList {
     public OrderBookList(String[] bookName, String[] bookCount) {
         this.bookName = bookName;
         this.bookCount = bookCount;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderBookList{" +
+                "bookName=" + Arrays.toString(bookName) +
+                ", bookCount=" + Arrays.toString(bookCount) +
+                '}';
     }
 }
 

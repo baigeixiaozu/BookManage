@@ -6,7 +6,7 @@ $(function() {
             bookname[i]=$(this).text();
         });
         var bookcount=[];
-        $("#books input").each(function (i){
+        $("#books button").each(function (i){
          bookcount[i]=$(this).val();
         })
         $.ajax({

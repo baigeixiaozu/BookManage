@@ -6,7 +6,7 @@ $(function() {
             bookname[i]=$(this).text();
         });
         var bookcount=[];
-        $("#books input").each(function (i){
+        $("#books button").each(function (i){
          bookcount[i]=$(this).val();
         })
         $.ajax({
@@ -15,7 +15,7 @@ $(function() {
             data: {"bookName":bookname, "bookCount":bookcount},
             dataType: "text",
             success: function (data) {
-                alert("提交成功"+"\r\n"+data);
+                alert("提交成功!"+"\r\n"+data);
 
             },
             error: function () {

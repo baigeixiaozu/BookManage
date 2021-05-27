@@ -27,6 +27,18 @@ li{
 
     font-size: 20px;
 }
-#btn{
+.item button{
     font-size: 20px;
+    transition: 0.5s;
 }
+
+.item button:hover {
+    color: #fff;
+    background: #0a90f5;
+}
+.on{
+    background: #d73a49;
+}
+
+
+

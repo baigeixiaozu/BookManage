@@ -49,6 +49,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/MarketingSystem.css">
     <script src="${pageContext.request.contextPath}/assets/js/MarketingSystem.js" charset="UTF-8"></script>
     <script src="${pageContext.request.contextPath}/assets/js/MarketingSystemAjax.js" charset="UTF-8"></script>
+
 </head>
 <body>
 <% response.setCharacterEncoding("UTF-8");%>
@@ -58,8 +59,6 @@
 
 <div class="box">
     <div>查询</div>
-    <div>发布通知</div>
-    <div>查看通知</div>
     <div>提交订书单</div>
 </div>
 <div class="box1">
@@ -73,21 +72,17 @@
         </ul>
     </div>
     <div class="item">
-        请输入要提交的消息<input type="text">
-    </div>
-    <div class="item">消息栏</div>
-    <div class="item">
         <ul id="books">
-            <li >JSP实用教程（第4版）</li><input type="text" value="0">
-            <li >计算机组成原理微课版</li><input type="text" value="0">
-            <li >软件工程：实践者的研究方法（原书第8版）（本科教学版）</li><input type="text" value="0">
-            <li >web前端设计基础——html5、css3、java(二版)</li><input type="text" value="0">
-            <li >新目标大学英语系列教材：科技英语教程学生用书</li><input type="text" value="0">
-            <li >概率论与数理统计及其应用（第2版）</li><input type="text" value="0">
+            <li >JSP实用教程（第4版）</li><button class="btn1" value="0">订购</button>
+            <li >计算机组成原理微课版</li><button class="btn1" value="0">订购</button>
+            <li >软件工程：实践者的研究方法（原书第8版）（本科教学版）</li><button class="btn1" value="0">订购</button>
+            <li >web前端设计基础——html5、css3、java(二版)</li><button class="btn1" value="0">订购</button>
+            <li >新目标大学英语系列教材：科技英语教程学生用书</li><button class="btn1" value="0">订购</button>
+            <li >概率论与数理统计及其应用（第2版）</li><button class="btn1" value="0">订购</button>
        </ul>
         <br>
         <input type="button" value="提交" id="btn">
     </div>
 </div>
-</body></body>
+</body>
 </html>
