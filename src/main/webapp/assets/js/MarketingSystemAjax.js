@@ -13,15 +13,13 @@ $(function() {
             type: "post",
             url: "/BookManage/MarketingSystemServlet",
             data: {"bookName":bookname, "bookCount":bookcount},
-            dataType: "json",
+            dataType: "text",
             success: function (data) {
-                var str = JSON.stringify(data);
-                alert("提交成功");
-                alert(data.bookName + "/" + data.bookCount);
-            //    $("#div1").html("<h2>" + str + "</h2>");
+                alert("提交成功!"+"\r\n"+data);
+
             },
-            error: function (data) {
-                alert("提交失败"+JSON.stringify(data));
+            error: function () {
+                alert("提交失败,请重试或者检查您的环境");
             }
         })
     })

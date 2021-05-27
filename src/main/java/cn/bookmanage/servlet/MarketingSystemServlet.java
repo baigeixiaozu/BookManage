@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import cn.bookmanage.service.MarketingSystem.showLackBooks;
 
 @WebServlet(name = "MarketingSystemServlet", value = "/MarketingSystemServlet")
 public class MarketingSystemServlet extends HttpServlet {
@@ -26,16 +27,21 @@ public class MarketingSystemServlet extends HttpServlet {
         String[] bookCount=request.getParameterValues("bookCount[]");
         OrderBookList user=new OrderBookList(bookName, bookCount);
 
+        int[] lack=new int[6];
+        for(int i=0;i<6;i++){
+            lack[i]=0;
+        }
+        lack = InsertByNameService.Insert(bookName, bookCount);
+        StringBuilder text= new StringBuilder("目前暂缺的书籍:");
+        for(int i=0;i<lack.length;i++){
+            if(lack[i]!=0){
+                text.append(showLackBooks.show(i,lack[i]));
+            }
+        }
 
-        InsertByNameService.Insert(bookName,bookCount);
 
-
-
-        ObjectMapper mapper = new ObjectMapper(); //Jackson的核心类
-        String json = mapper.writeValueAsString(user);
-      //  System.out.println(json+"\n");
-
+        String message=text.toString();
         PrintWriter out = response.getWriter();
-        out.print(json);
+        out.print(message);
     }
 }
