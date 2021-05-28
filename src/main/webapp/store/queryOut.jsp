@@ -76,7 +76,7 @@
     <div class="page-nav">
         <c:if test="${curPage-1>0}">
             <div>
-                <a href="store/queryIn.jsp?page=${curPage-1}">上一页</a>
+                <a href="store/queryOut.jsp?page=${curPage-1}">上一页</a>
             </div>
         </c:if>
         <c:forEach begin="1" end="${pageCnt}" varStatus="s">
@@ -85,13 +85,13 @@
                     <span>${s.index}</span>
                 </c:if>
                 <c:if test="${curPage!=s.index}">
-                    <a href="store/queryIn.jsp?page=${s.index}">${s.index}</a>
+                    <a href="store/queryOut.jsp?page=${s.index}">${s.index}</a>
                 </c:if>
             </div>
         </c:forEach>
         <c:if test="${curPage!=pageCnt}">
             <div>
-                <a href="store/queryIn.jsp?page=${param.page+1}">下一页</a>
+                <a href="store/queryOut.jsp?page=${param.page?1:param.page+1}">下一页</a>
             </div>
         </c:if>
     </div>
