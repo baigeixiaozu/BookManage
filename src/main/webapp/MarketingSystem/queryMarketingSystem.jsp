@@ -45,10 +45,10 @@
 <head>
     <title>This is Marketing System</title>
 
-    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery-3.6.0.min.js" charset="UTF-8"></script>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/MarketingSystem.css">
-    <script src="${pageContext.request.contextPath}/assets/js/MarketingSystem.js" charset="UTF-8"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/MarketingSystemAjax.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="assets/js/jquery-3.6.0.min.js" charset="UTF-8"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/MarketingSystem.css">
+    <script src="assets/js/MarketingSystem.js" charset="UTF-8"></script>
+    <script src="assets/js/MarketingSystemAjax.js" charset="UTF-8"></script>
 </head>
 <body>
 <% response.setCharacterEncoding("UTF-8");%>
@@ -66,9 +66,9 @@
     <div class="item">
         <ul>
             <li>
-                <div class="search"><a href="${pageContext.request.contextPath}/MarketingSystem/searchByName.jsp">按书名查询</a> </div>
-                <div class="search"><a href="${pageContext.request.contextPath}/MarketingSystem/searchByAuthor.jsp">按作者查询</a> </div>
-                <div class="search"><a href="${pageContext.request.contextPath}/MarketingSystem/searchByISBN.jsp">按ISBN查询</a> </div>
+                <div class="search"><a href="MarketingSystem/searchByName.jsp">按书名查询</a> </div>
+                <div class="search"><a href="MarketingSystem/searchByAuthor.jsp">按作者查询</a> </div>
+                <div class="search"><a href="MarketingSystem/searchByISBN.jsp">按ISBN查询</a> </div>
             </li>
         </ul>
     </div>
