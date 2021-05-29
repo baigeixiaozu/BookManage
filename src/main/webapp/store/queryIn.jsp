@@ -24,14 +24,14 @@
 
     // URL编码,处理含参地址
     redirect = URLEncoder.encode(redirect, "UTF-8");
-    if(user == null){
-        response.sendRedirect("../error/401.jsp?redirect=" + redirect);
-        return;
-    }
+    // if(user == null){
+    //     response.sendRedirect("../error/401.jsp?redirect=" + redirect);
+    //     return;
+    // }
 %>
-<c:if test="${sessionScope.user.level!=10}">
-    <jsp:forward page="../error/403.jsp" />
-</c:if>
+<%--<c:if test="${sessionScope.user.level!=10}">--%>
+<%--    <jsp:forward page="../error/403.jsp" />--%>
+<%--</c:if>--%>
 
 <%--权限检查END--%>
 
@@ -41,10 +41,12 @@
 
 <%
     String p = request.getParameter("page");
+    String order = request.getParameter("order");
+    if(order==null)order="1,0";
     int curPage = p==null||p.length()==0?1:Integer.parseInt(p);
     int count = 10;
     StoreService ss = new StoreServiceImpl();
-    List<Object> data = ss.queryIn(curPage, count);
+    List<Object> data = ss.queryIn(curPage, count, order);
     List<StoreRecord> records = (List<StoreRecord>)data.get(1);
     int total = (int)data.get(0);
     pageContext.setAttribute("pageCnt", total/count + 1);
@@ -60,6 +62,7 @@
         <tr>
             <td>序号</td>
             <td>书名</td>
+            <td>数量</td>
             <td>入库时间</td>
         </tr>
         </thead>
@@ -68,6 +71,7 @@
             <tr>
                 <td>${s.index}</td>
                 <td>${record.name}</td>
+                <td>${record.count}</td>
                 <td>${record.time}</td>
             </tr>
 
@@ -94,7 +98,7 @@
         </c:forEach>
         <c:if test="${curPage!=pageCnt}">
             <div>
-                <a href="store/queryIn.jsp?page=${param.page?1:param.page+1}">下一页</a>
+                <a href="store/queryIn.jsp?page=${param.page==null?2:param.page+1}">下一页</a>
             </div>
         </c:if>
     </div>

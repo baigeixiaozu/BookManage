@@ -22,14 +22,14 @@
     String redirect = req + (query==null?"":"?"+query);
     // URL编码,处理含参地址
     redirect = URLEncoder.encode(redirect, "UTF-8");
-    if(user == null){
-        response.sendRedirect("../error/401.jsp?redirect=" + redirect);
-        return;
-    }
+    // if(user == null){
+    //     response.sendRedirect("../error/401.jsp?redirect=" + redirect);
+    //     return;
+    // }
 %>
-<c:if test="${sessionScope.user.level!=10}">
-    <jsp:forward page="../error/403.jsp" />
-</c:if>
+<%--<c:if test="${sessionScope.user.level!=10}">--%>
+<%--    <jsp:forward page="../error/403.jsp" />--%>
+<%--</c:if>--%>
 <%--权限检查END--%>
 
 <jsp:include page="../template/header.jsp">
@@ -91,7 +91,7 @@
         </c:forEach>
         <c:if test="${curPage!=pageCnt}">
             <div>
-                <a href="store/queryOut.jsp?page=${param.page?1:param.page+1}">下一页</a>
+                <a href="store/queryOut.jsp?page=${param.page==null?2:param.page+1}">下一页</a>
             </div>
         </c:if>
     </div>

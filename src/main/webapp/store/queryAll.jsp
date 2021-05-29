@@ -88,10 +88,10 @@
         </c:if>
         <c:forEach begin="1" end="<%=pageCnt%>" varStatus="s">
             <div>
-                <c:if test="${param.page==s.index}">
+                <c:if test="${(param.page==null&&s.index==1)||param.page==s.index}">
                     <span>${s.index}</span>
                 </c:if>
-                <c:if test="${param.page!=s.index}">
+                <c:if test="${(param.page==null&&s.index!=1)||(param.page!=null&&param.page!=s.index)}">
                     <a href="store/queryAll.jsp?page=${s.index}">${s.index}</a>
                 </c:if>
             </div>

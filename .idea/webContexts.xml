@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/MarketingSystem/queryMarketingSystem.jsp" value="file://$PROJECT_DIR$/src/main/webapp/MarketingSystem" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/store/queryIn.jsp" value="file://$PROJECT_DIR$/src/main/webapp/store" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/template/header.jsp" value="file://$PROJECT_DIR$/src/main/webapp/template" />
       </map>
     </option>
