@@ -1,9 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="cn.bookmanage.service.impl.StoreServiceImpl" %>
-<%@ page import="cn.bookmanage.service.StoreService" %>
-<%@ page import="cn.bookmanage.entity.Book" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="cn.bookmanage.entity.User" %>
 <%@ page import="java.net.URLEncoder" %><%--
   Created by IntelliJ IDEA.
@@ -25,14 +20,14 @@
     // URL编码,处理含参地址
     redirect = URLEncoder.encode(redirect, "UTF-8");
 
-    // if(user == null){
-    //     response.sendRedirect("../error/401.jsp?redirect=" + redirect);
-    //     return;
-    // }
+    if(user == null){
+        response.sendRedirect("../error/401.jsp?redirect=" + redirect);
+        return;
+    }
 %>
-<%--<c:if test="${sessionScope.user.level!=10}">--%>
-<%--    <jsp:forward page="../error/403.jsp" />--%>
-<%--</c:if>--%>
+<c:if test="${sessionScope.user.level!=10}">
+    <jsp:forward page="../error/403.jsp" />
+</c:if>
 <%--权限检查END--%>
 
 <jsp:include page="../template/header.jsp">
@@ -41,6 +36,11 @@
 
 <link rel="stylesheet" href="assets/css/github-markdown.css">
 <article class="markdown-body">
+    <style>
+        #tableHead{
+            cursor: pointer;
+        }
+    </style>
     <h2>这是查询全部库存的页面</h2>
     <table>
         <thead>
