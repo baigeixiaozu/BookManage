@@ -22,10 +22,10 @@
     String redirect = req + (query==null?"":"?"+query);
     // URL编码,处理含参地址
     redirect = URLEncoder.encode(redirect, "UTF-8");
-    // if(user == null){
-    //     response.sendRedirect("../error/401.jsp?redirect=" + redirect);
-    //     return;
-    // }
+    if(user == null){
+        response.sendRedirect("../error/401.jsp?redirect=" + redirect);
+        return;
+    }
 %>
 <%--<c:if test="${sessionScope.user.level!=10}">--%>
 <%--    <jsp:forward page="../error/403.jsp" />--%>
