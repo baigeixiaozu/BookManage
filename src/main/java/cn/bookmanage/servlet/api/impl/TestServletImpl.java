@@ -1,14 +1,13 @@
-package cn.bookmanage.service.api.impl;
+package cn.bookmanage.servlet.api.impl;
 
-import cn.bookmanage.service.api.ITestService;
-import cn.bookmanage.service.impl.APIServiceImpl;
+import cn.bookmanage.servlet.api.ITestServlet;
 import cn.bookmanage.utils.JsonUtil;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestServiceImpl extends APIServiceImpl implements ITestService {
+public class TestServletImpl extends APIBaseServletImpl implements ITestServlet {
 
     /**
      * 方法中不能含参，否则无法被调用

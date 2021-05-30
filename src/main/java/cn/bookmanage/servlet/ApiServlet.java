@@ -50,9 +50,9 @@ public class ApiServlet extends HttpServlet {
             Map<String, String> route = parsedURI.get(0);
 
             // 服务包
-            String basePkg = "cn.bookmanage.service";
+            String basePkg = "cn.bookmanage.servlet";
             // 构造试图请求的类
-            pkg = basePkg + "." + route.get("subPkg") + ".impl." + route.get("service") + "ServiceImpl";
+            pkg = basePkg + "." + route.get("subPkg") + ".impl." + route.get("service") + "ServletImpl";
 
             // 从这里开始使用反射来自动创建类，以及调用方法
             // transfer method by reflection
