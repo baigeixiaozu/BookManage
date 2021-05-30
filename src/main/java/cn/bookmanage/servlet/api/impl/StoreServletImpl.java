@@ -10,7 +10,6 @@ import cn.bookmanage.servlet.api.IStoreServlet;
 import cn.bookmanage.utils.JsonUtil;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +25,9 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
     public void queryAllAction() throws IOException {
         User user = (User) request.getSession().getAttribute("user");
 
-        // if (user == null) {
-        //     throw new BaseException(403, "权限不足");
-        // }
+        if (user == null) {
+            throw new BaseException(403, "权限不足");
+        }
 
         String p = request.getParameter("page");
         String order = request.getParameter("order");
@@ -58,6 +57,11 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
 
     @Override
     public void queryInAction() throws IOException {
+        User user = (User) request.getSession().getAttribute("user");
+
+        if (user == null) {
+            throw new BaseException(403, "权限不足");
+        }
 
         String p = request.getParameter("page");
         String order = request.getParameter("order");
@@ -85,6 +89,12 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
 
     @Override
     public void queryOutAction() throws IOException {
+        User user = (User) request.getSession().getAttribute("user");
+
+        if (user == null) {
+            throw new BaseException(403, "权限不足");
+        }
+
         String p = request.getParameter("page");
         int curPage = p==null||p.length()==0?1:Integer.parseInt(p);
         int count = 10;

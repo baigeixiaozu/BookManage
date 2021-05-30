@@ -90,10 +90,11 @@ const tableBody = function (){
     let orderEvent = ()=>{
         const thead = $("#tableHead").children();
         for (let i = 0; i < thead.length; i++) {
-
             thead[i].onclick = ()=>{
-                if(order[0] === i + 1)
-                    order[1] = ++order[1]%2;
+                if(order[0] === i + 1) {
+                    order[1] = ++order[1] % 2;
+                    thead[i].lastChild.style.transform = order[1]===0?"rotate(180deg)":"rotate(0deg)";
+                }
                 order[0] = i + 1;
                 query(1)
             }

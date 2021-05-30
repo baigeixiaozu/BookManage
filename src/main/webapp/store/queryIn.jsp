@@ -38,19 +38,23 @@
 
 <link rel="stylesheet" href="assets/css/github-markdown.css">
 <article class="markdown-body">
+    <link rel="stylesheet" href="assets/css/font/iconfont.css">
     <style>
         #tableHead{
             cursor: pointer;
+        }
+        #tableHead i {
+            float: right;
         }
     </style>
     <h2>这是入库查询页面</h2>
     <table>
         <thead>
         <tr id="tableHead">
-            <td>序号</td>
-            <td>书名</td>
-            <td>数量</td>
-            <td>入库时间</td>
+            <td>序号<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>书名<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>数量<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>入库时间<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
         </tr>
         </thead>
         <tbody id="tbody">

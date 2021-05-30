@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="cn.bookmanage.entity.User" %>
-<%@ page import="java.net.URLEncoder" %><%--
+<%@ page import="java.net.URLEncoder" %>
+<%--
   Created by IntelliJ IDEA.
   User: jiyec
   Date: 2021/5/13
@@ -36,22 +37,26 @@
 
 <link rel="stylesheet" href="assets/css/github-markdown.css">
 <article class="markdown-body">
+    <link rel="stylesheet" href="assets/css/font/iconfont.css">
     <style>
         #tableHead{
             cursor: pointer;
+        }
+        #tableHead i {
+            float: right;
         }
     </style>
     <h2>这是查询全部库存的页面</h2>
     <table>
         <thead>
         <tr id="tableHead">
-            <td>序号</td>
-            <td>书名</td>
-            <td>作者</td>
-            <td>出版社</td>
-            <td>ISBN</td>
-            <td>价格</td>
-            <td>数量</td>
+            <td>序号<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>书名<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>作者<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>出版社<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>ISBN<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>价格<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>数量<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
         </tr>
         </thead>
         <tbody id="tbody">
