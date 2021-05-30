@@ -93,8 +93,14 @@ const tableBody = function (){
             thead[i].onclick = ()=>{
                 if(order[0] === i + 1) {
                     order[1] = ++order[1] % 2;
-                    thead[i].lastChild.style.transform = order[1]===0?"rotate(180deg)":"rotate(0deg)";
                 }
+
+                let icon = $("#tableHead td>i");
+                for (const ie of icon) {
+                    ie.style.display="none"
+                }
+                thead[i].lastChild.style.display="block"
+                thead[i].lastChild.style.transform = order[1]===0?"rotate(180deg)":"rotate(0deg)";
                 order[0] = i + 1;
                 query(1)
             }

@@ -45,6 +45,7 @@
         }
         #tableHead i {
             float: right;
+            display: none;
         }
     </style>
     <h2>这是出库查询页面</h2>

@@ -45,6 +45,7 @@
         }
         #tableHead i {
             float: right;
+            display: none;
         }
     </style>
     <h2>这是入库查询页面</h2>

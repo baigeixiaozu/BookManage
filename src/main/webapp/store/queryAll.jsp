@@ -44,6 +44,7 @@
         }
         #tableHead i {
             float: right;
+            display: none;
         }
     </style>
     <h2>这是查询全部库存的页面</h2>
