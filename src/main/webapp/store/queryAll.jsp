@@ -25,36 +25,26 @@
     // URL编码,处理含参地址
     redirect = URLEncoder.encode(redirect, "UTF-8");
 
-    if(user == null){
-        response.sendRedirect("../error/401.jsp?redirect=" + redirect);
-        return;
-    }
+    // if(user == null){
+    //     response.sendRedirect("../error/401.jsp?redirect=" + redirect);
+    //     return;
+    // }
 %>
-<c:if test="${sessionScope.user.level!=10}">
-    <jsp:forward page="../error/403.jsp" />
-</c:if>
+<%--<c:if test="${sessionScope.user.level!=10}">--%>
+<%--    <jsp:forward page="../error/403.jsp" />--%>
+<%--</c:if>--%>
 <%--权限检查END--%>
 
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="查询库存"/>
 </jsp:include>
 
-<%
-    String p = request.getParameter("page");
-    int curPage = p==null||p.length()==0?1:Integer.parseInt(p);
-    int count = 10;
-    StoreService ss = new StoreServiceImpl();
-    Map<String, Object> data = ss.queryAll(curPage, count);
-    List<Book> books = (List<Book>)data.get("books");
-    int total = (int)data.get("total");
-    int pageCnt = total/count + 1;
-%>
 <link rel="stylesheet" href="assets/css/github-markdown.css">
 <article class="markdown-body">
     <h2>这是查询全部库存的页面</h2>
     <table>
         <thead>
-        <tr>
+        <tr id="tableHead">
             <td>序号</td>
             <td>书名</td>
             <td>作者</td>
@@ -64,43 +54,20 @@
             <td>数量</td>
         </tr>
         </thead>
-        <tbody>
-        <c:forEach items="<%=books%>" var="book" varStatus="s">
-            <tr>
-                <td>${s.index+1}</td>
-                <td>${book.name}</td>
-                <td>${book.author}</td>
-                <td>${book.publish}</td>
-                <td>${book.isbn}</td>
-                <td>${book.price}</td>
-                <td>${book.count}</td>
-            </tr>
-        </c:forEach>
+        <tbody id="tbody">
         </tbody>
     </table>
 
     <!--页码跳转-->
-    <div class="page-nav">
-        <c:if test="<%=curPage-1>0%>">
+    <div class="page-nav" id="page-nav">
             <div>
-                <a href="store/queryAll.jsp?page=<%=curPage-1%>">上一页</a>
+                <button id="pre">上一页</button>
             </div>
-        </c:if>
-        <c:forEach begin="1" end="<%=pageCnt%>" varStatus="s">
+            <div id="middle">
+            </div>
             <div>
-                <c:if test="${(param.page==null&&s.index==1)||param.page==s.index}">
-                    <span>${s.index}</span>
-                </c:if>
-                <c:if test="${(param.page==null&&s.index!=1)||(param.page!=null&&param.page!=s.index)}">
-                    <a href="store/queryAll.jsp?page=${s.index}">${s.index}</a>
-                </c:if>
+                <button id="next">下一页</button>
             </div>
-        </c:forEach>
-        <c:if test="<%=(curPage!=pageCnt)%>">
-            <div>
-                <a href="store/queryAll.jsp?page=<%=curPage+1%>">下一页</a>
-            </div>
-        </c:if>
     </div>
     <style>
         .page-nav{
@@ -112,4 +79,10 @@
         }
     </style>
 </article>
+<script src="assets/js/store.js"></script>
+<script>
+    $(document).ready(()=>{
+        tableBody.init("All")
+    });
+</script>
 <jsp:include page="../template/footer.jsp" />

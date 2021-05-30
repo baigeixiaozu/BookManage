@@ -13,7 +13,7 @@
     <title>${param.title!=null?param.title:"教材订购系统"} - 教材订购系统</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/common.css" />
-
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header id="header">

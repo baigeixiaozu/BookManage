@@ -20,11 +20,13 @@ import java.util.Map;
  * @Version 1.0
  **/
 public class StoreDao {
-    public static Map<String, Object> queryAll(int page, int count){
+    public static Map<String, Object> queryAll(int page, int count, int[] orderInfo){
         Connection connection = null;
 
         List<Book> books = new LinkedList<>();
         int total = 0;
+        String[] orderType = {"ASC", "DESC"};
+
         try{
             connection = JNDIUtils.getConnection();
 
@@ -35,7 +37,7 @@ public class StoreDao {
             }
             rs.close();
 
-            sql = "SELECT * FROM bm_book LIMIT ?,?";
+            sql = "SELECT * FROM bm_book ORDER BY " + orderInfo[0] + " " +  orderType[orderInfo[1]] + " LIMIT ?,?";
             Integer[] p = new Integer[]{
                     (page - 1) * count,
                     count
@@ -72,7 +74,6 @@ public class StoreDao {
             put("total", finalTotal);
         }};
     }
-
 
     /**
      * 查询出入库

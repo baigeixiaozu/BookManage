@@ -12,8 +12,9 @@ import java.util.Map;
  * @Version 1.0
  **/
 public class StoreServiceImpl implements StoreService {
-    public Map<String, Object> queryAll(int page, int count){
-        return StoreDao.queryAll(page, count);
+    public Map<String, Object> queryAll(int page, int count, String order){
+        String[] orderArr = order.split(",");
+        return StoreDao.queryAll(page, count, new int[]{Integer.parseInt(orderArr[0]), Integer.parseInt(orderArr[1])});
     }
 
     public List<Object> queryIn(int page, int count, String order){

@@ -26,15 +26,19 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
     public void queryAllAction() throws IOException {
         User user = (User) request.getSession().getAttribute("user");
 
-        if (user == null) {
-            throw new BaseException(403, "权限不足");
-        }
+        // if (user == null) {
+        //     throw new BaseException(403, "权限不足");
+        // }
 
         String p = request.getParameter("page");
+        String order = request.getParameter("order");
+        if(order == null)order="1,0";
+        if(order.length() != 3)throw new BaseException(401, "参数异常");
+
         int curPage = p == null || p.length() == 0 ? 1 : Integer.parseInt(p);
         int count = 10;
         StoreService ss = new StoreServiceImpl();
-        Map<String, Object> data = ss.queryAll(curPage, count);
+        Map<String, Object> data = ss.queryAll(curPage, count, order);
         List<Book> books = (List<Book>) data.get("books");
         int total = (int) data.get("total");
         int pageCnt = total / count + 1;
