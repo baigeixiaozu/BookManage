@@ -52,6 +52,17 @@
 
                     </ul>
                 </li>
+                <li class="menu-list">
+                    <span id="message">库存</span>
+                    <ul class="menu-list-sub">
+                        <li>
+                            <a href="PurchasingSystem/queryorder.jsp" >查看消息</a>
+                        </li>
+                        <li>
+                            <a href="" >发消息</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <div class="right">
@@ -78,4 +89,4 @@
                 document.getElementById("index").classList.add("active")
         </script>
     </header>
-    <section class="main-body">
+    <section class="main-body"></section>
