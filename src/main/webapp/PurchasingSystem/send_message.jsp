@@ -11,6 +11,17 @@
     <title>Send info</title>
 </head>
 <body>
-
+<form action="http://localhost:8080/BookManage_war_exploded/purchaseServlet" method="post">
+内容<input type="text" name="content" value=""/>
+</br>
+收取方<input type="checkbox" name="receiver" value="管理员">管理员
+<input type="checkbox" name="receiver" value="采购员">采购员
+</br>
+发送方<input type="checkbox" name="sender" value="管理员">管理员
+<input type="checkbox" name="sender" value="采购员">采购员
+</br>
+<input type="submit" value="发送">
+<input type="reset" value="重置">
+</form>
 </body>
 </html>

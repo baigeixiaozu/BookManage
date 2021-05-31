@@ -44,7 +44,9 @@
 <%
 
     PurchasingServices ps=new PurchasingServices();
-    ArrayList<info> sample= ps.fetch_i();
+    ArrayList<info> sample= ps.fetch();
+    if(sample==null)
+        sample=ps.fetch_i();//如果此时purchase里面的数据被删除了
     ps.store(sample);
     for(int i=0;i<sample.size();i++){
         out.print(sample.get(i).getContent()+"<br/>");}

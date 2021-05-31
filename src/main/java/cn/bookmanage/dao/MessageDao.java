@@ -96,11 +96,15 @@ public class MessageDao {
             for(i=0;i<sample.size();i++){
                 connection = JNDIUtils.getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql);
-                ps.setInt(1,i);
+                Long t=(sample.get(i).getInfo_id());
+                int tem=Integer.valueOf(t.toString());
+                ps.setInt(1,tem);
                 String temp=sample.get(i).getContent();
                 ps.setString(2,temp);
                 Date date=new Date();
-                ps.setDate(3, null);
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                PreparedStatement pst = connection.prepareStatement(sql);
+                ps.setDate(3, sqlDate);
                 ps.setString(4,"采购员");
                 ps.setString(5,"管理员");
                 ps.setInt(6,0);

@@ -59,7 +59,7 @@
                             <a href="PurchasingSystem/queryorder.jsp" >查看消息</a>
                         </li>
                         <li>
-                            <a href="" >发消息</a>
+                            <a href="PurchasingSystem/send_message.jsp" >发消息</a>
                         </li>
                     </ul>
                 </li>
