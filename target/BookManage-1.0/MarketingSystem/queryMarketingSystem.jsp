@@ -5,7 +5,7 @@
   Time: 22:39
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page import="cn.bookmanage.service.impl.StoreServiceImpl" %>
 <%@ page import="cn.bookmanage.service.StoreService" %>
 <%@ page import="cn.bookmanage.entity.Book" %>

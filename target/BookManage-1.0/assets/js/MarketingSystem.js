@@ -21,11 +21,11 @@ window.onload = function () {
     for(let i=0;i<count.length;i++){
         count[i].onclick=function (){
             count[i].value=1;
-            count[i].className="on"
+            count[i].className="btn1 on"
         }
     }
-    var Btn=document.getElementById("btn");
-    Btn.onclick=function (){
-        confirm("确定提交？");
-    }
+     var Btn=document.getElementById("btn");
+     Btn.onclick=function (){
+         confirm("确定提交？");
+     }
 }
