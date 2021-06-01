@@ -1,9 +1,8 @@
-package cn.bookmanage.service.api.impl;
+package cn.bookmanage.servlet.api.impl;
 
 import cn.bookmanage.dao.UserDao;
 import cn.bookmanage.entity.User;
-import cn.bookmanage.service.api.IUserService;
-import cn.bookmanage.service.impl.APIServiceImpl;
+import cn.bookmanage.servlet.api.IUserServlet;
 import cn.bookmanage.utils.JsonUtil;
 
 import java.io.IOException;
@@ -15,7 +14,7 @@ import java.util.Map;
  * @Date 2021/5/13 10:54
  * @Version 1.0
  **/
-public class UserServiceImpl extends APIServiceImpl implements IUserService {
+public class UserServletImpl extends APIBaseServletImpl implements IUserServlet {
     @Override
     public void loginAction() throws IOException {
         String username = request.getParameter("username");

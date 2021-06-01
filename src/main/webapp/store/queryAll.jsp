@@ -1,11 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="cn.bookmanage.service.impl.StoreServiceImpl" %>
-<%@ page import="cn.bookmanage.service.StoreService" %>
-<%@ page import="cn.bookmanage.entity.Book" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="cn.bookmanage.entity.User" %>
-<%@ page import="java.net.URLEncoder" %><%--
+<%@ page import="java.net.URLEncoder" %>
+<%--
   Created by IntelliJ IDEA.
   User: jiyec
   Date: 2021/5/13
@@ -39,68 +35,45 @@
     <jsp:param name="title" value="查询库存"/>
 </jsp:include>
 
-<%
-    String p = request.getParameter("page");
-    int curPage = p==null||p.length()==0?1:Integer.parseInt(p);
-    int count = 10;
-    StoreService ss = new StoreServiceImpl();
-    Map<String, Object> data = ss.queryAll(curPage, count);
-    List<Book> books = (List<Book>)data.get("books");
-    int total = (int)data.get("total");
-    int pageCnt = total/count + 1;
-%>
 <link rel="stylesheet" href="assets/css/github-markdown.css">
 <article class="markdown-body">
+    <link rel="stylesheet" href="assets/css/font/iconfont.css">
+    <style>
+        #tableHead{
+            cursor: pointer;
+        }
+        #tableHead i {
+            float: right;
+            display: none;
+        }
+    </style>
     <h2>这是查询全部库存的页面</h2>
     <table>
         <thead>
-        <tr>
-            <td>序号</td>
-            <td>书名</td>
-            <td>作者</td>
-            <td>出版社</td>
-            <td>ISBN</td>
-            <td>价格</td>
-            <td>数量</td>
+        <tr id="tableHead">
+            <td>序号<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>书名<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>作者<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>出版社<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>ISBN<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>价格<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
+            <td>数量<i class="iconfont icon-down-copy-copy" style="transform: rotate(180deg);"></i></td>
         </tr>
         </thead>
-        <tbody>
-        <c:forEach items="<%=books%>" var="book" varStatus="s">
-            <tr>
-                <td>${s.index+1}</td>
-                <td>${book.name}</td>
-                <td>${book.author}</td>
-                <td>${book.publish}</td>
-                <td>${book.isbn}</td>
-                <td>${book.price}</td>
-                <td>${book.count}</td>
-            </tr>
-        </c:forEach>
+        <tbody id="tbody">
         </tbody>
     </table>
 
     <!--页码跳转-->
-    <div class="page-nav">
-        <c:if test="<%=curPage-1>0%>">
+    <div class="page-nav" id="page-nav">
             <div>
-                <a href="store/queryAll.jsp?page=<%=curPage-1%>">上一页</a>
+                <button id="pre">上一页</button>
             </div>
-        </c:if>
-        <c:forEach begin="1" end="<%=pageCnt%>" varStatus="s">
+            <div id="middle">
+            </div>
             <div>
-                <c:if test="${param.page==s.index}">
-                    <span>${s.index}</span>
-                </c:if>
-                <c:if test="${param.page!=s.index}">
-                    <a href="store/queryAll.jsp?page=${s.index}">${s.index}</a>
-                </c:if>
+                <button id="next">下一页</button>
             </div>
-        </c:forEach>
-        <c:if test="<%=(curPage!=pageCnt)%>">
-            <div>
-                <a href="store/queryAll.jsp?page=<%=curPage+1%>">下一页</a>
-            </div>
-        </c:if>
     </div>
     <style>
         .page-nav{
@@ -112,4 +85,10 @@
         }
     </style>
 </article>
+<script src="assets/js/store.js"></script>
+<script>
+    $(document).ready(()=>{
+        tableBody.init("All")
+    });
+</script>
 <jsp:include page="../template/footer.jsp" />

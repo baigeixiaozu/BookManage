@@ -1,4 +1,4 @@
-package cn.bookmanage.service.api;
+package cn.bookmanage.servlet.api;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import java.io.IOException;
  * @Date 2021/5/13 10:53
  * @Version 1.0
  **/
-public interface IUserService {
+public interface IUserServlet {
     void loginAction() throws IOException;
     void logoutAction() throws IOException;
 }

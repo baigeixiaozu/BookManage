@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 
         User user = new UserServiceImpl().login(username, userpass);
 
-        Map<String, Object> ret = new HashMap<String, Object>(){{
+            Map<String, Object> ret = new HashMap<String, Object>(){{
             put("code", 2000);
         }};
 

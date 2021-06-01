@@ -1,7 +1,7 @@
 
-function httpGet(url) {
+function httpGet(url, data) {
     return new Promise((resolve, reject) => {
-        $.get(url, resolve);
+        $.get(url, data, resolve);
     });
 }
 function httpPost(url, param) {

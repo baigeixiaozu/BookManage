@@ -18,5 +18,6 @@ public class Book {
     private String isbn;
     private double price;
     private long count;
+    private int need;
 
 }

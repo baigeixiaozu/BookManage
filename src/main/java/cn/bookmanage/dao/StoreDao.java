@@ -20,11 +20,13 @@ import java.util.Map;
  * @Version 1.0
  **/
 public class StoreDao {
-    public static Map<String, Object> queryAll(int page, int count){
+    public static Map<String, Object> queryAll(int page, int count, int[] orderInfo){
         Connection connection = null;
 
         List<Book> books = new LinkedList<>();
         int total = 0;
+        String[] orderType = {"ASC", "DESC"};
+
         try{
             connection = JNDIUtils.getConnection();
 
@@ -35,7 +37,7 @@ public class StoreDao {
             }
             rs.close();
 
-            sql = "SELECT * FROM bm_book LIMIT ?,?";
+            sql = "SELECT * FROM bm_book ORDER BY " + orderInfo[0] + " " +  orderType[orderInfo[1]] + " LIMIT ?,?";
             Integer[] p = new Integer[]{
                     (page - 1) * count,
                     count
@@ -73,23 +75,26 @@ public class StoreDao {
         }};
     }
 
-
     /**
      * 查询出入库
      * @param page  页数
      * @param count 分页大小
-     * @param type  类型[0入库|1出库]
+     * @param type  类型 [0入库|1出库]
+     * @param orderInfo 排序参数 {排序的列, 排序方式}
      * @return List -- [total, recordList]
      */
-    public static List<Object> queryInOut(int page, int count, int type){
+    public static List<Object> queryInOut(int page, int count, int type, int[] orderInfo){
         Connection connection = null;
 
         String[] table = {"in", "out"};
+        String[] orderType = {"ASC", "DESC"};
+
         List<StoreRecord> books = new LinkedList<>();
         int total = 0;
         try{
             connection = JNDIUtils.getConnection();
 
+            // 取总数
             String sql = "SELECT COUNT(1) FROM bm_" + table[type];
             ResultSet rs = JNDIUtils.executeQuery(connection, sql, null);
             while (rs.next()){
@@ -97,7 +102,11 @@ public class StoreDao {
             }
             rs.close();
 
-            sql = "SELECT * FROM `bm_" + table[type] + "` LEFT JOIN bm_book ON bm_" + table[type] + ".book_id=bm_book.book_id LIMIT ?,?";
+            // 务必保持列的顺序与前端一致，否则会造成排序数据显示异常
+            sql = "SELECT " + table[type] + "_id, book_name, "  + table[type] + "_count, "  + table[type] + "_time" +
+                    " FROM `bm_" + table[type] + "` LEFT JOIN bm_book ON bm_" + table[type] + ".book_id=bm_book.book_id " +
+                    "ORDER BY " + orderInfo[0] + " " + orderType[orderInfo[1]] +
+                    " LIMIT ?,?";
             Integer[] p = new Integer[]{
                     (page - 1) * count,
                     count

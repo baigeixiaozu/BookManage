@@ -6,31 +6,33 @@ import cn.bookmanage.entity.Book;
 public class InsertByNameService {
 
 
-    public static void Insert(String[] bookName, String[] bookCount) {
-        int i=0;
+    public static int[] Insert(String[] bookName, String[] bookCount) {
+        int i = 0;
         int num;
+        int[] lack;
+        lack= new int[]{0, 0, 0, 0, 0, 0, 0};
         for (String name : bookName) {
-            num=Integer.parseInt(bookCount[i]);
-            Book book = new Book();
-            book.setName(name);
-            if (name.contains("JSP")) {
-                book.setId(1);
-            } else if (name.startsWith("计算机")) {
-                book.setId(2);
-            } else if (name.startsWith("软件工程")) {
-                book.setId(3);
-            } else if (name.startsWith("web前端")) {
-                book.setId(4);
-            } else if (name.startsWith("新目标")) {
-                book.setId(5);
-            } else if (name.startsWith("概率论")) {
-                book.setId(6);
+            num = Integer.parseInt(bookCount[i]);
+            if(num!=0) {
+                Book book = new Book();
+                book.setName(name);
+                if (name.contains("JSP")) {
+                    book.setId(1);
+                } else if (name.startsWith("计算机")) {
+                    book.setId(2);
+                } else if (name.startsWith("软件工程")) {
+                    book.setId(3);
+                } else if (name.startsWith("web前端")) {
+                    book.setId(4);
+                } else if (name.startsWith("新目标")) {
+                    book.setId(5);
+                } else if (name.startsWith("概率论")) {
+                    book.setId(6);
+                }
+                lack[i] = UpdateDao.insertByName(book);
             }
-            UpdateDao.insertByName(book,num);
             i++;
         }
-
+        return lack;
     }
-
-
 }

@@ -13,7 +13,7 @@
     <title>${param.title!=null?param.title:"教材订购系统"} - 教材订购系统</title>
     <base href="${pageContext.request.contextPath}/">
     <link rel="stylesheet" href="assets/css/common.css" />
-
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header id="header">
@@ -46,11 +46,25 @@
                         <li>
                             <a href="" >子项3</a>
                         </li>
-                        <li>
-                            <a href="MarketingSystem/queryMarketingSystem.jsp">销售系统</a>
-                        </li>
 
                     </ul>
+                </li>
+                <li>
+                    <a href="MarketingSystem/queryMarketingSystem.jsp">销售系统</a>
+                </li>
+                <li class="menu-list">
+                    <span id="message">库存</span>
+                    <ul class="menu-list-sub">
+                        <li>
+                            <a href="PurchasingSystem/queryorder.jsp" >查看消息</a>
+                        </li>
+                        <li>
+                            <a href="PurchasingSystem/send_message.jsp" >发消息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-list">
+                    <a href="PurchasingSystem/purchase.jsp">购买操作</a>
                 </li>
             </ul>
         </nav>
@@ -78,4 +92,4 @@
                 document.getElementById("index").classList.add("active")
         </script>
     </header>
-    <section class="main-body">
+    <section class="main-body"></section>
