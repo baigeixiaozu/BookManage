@@ -9,25 +9,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 
-@WebServlet(name="purchaseServlet" ,urlPatterns={"/purchaseServlet"})
-public class purchaseServlet extends HttpServlet {
+@WebServlet(name="orderconfirm" ,urlPatterns={"/orderconfirm"})
+public class orderconfirm extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PurchasingServices ps=new PurchasingServices();
-        String content=request.getParameter("content");
-        String receiver=request.getParameter("receiver");
-        String sender=request.getParameter("sender");
-        ArrayList<info> samp= new ArrayList<info>();
-        info sample=new info();
-        sample.setTime(null);
-        sample.setContent(content);
-        sample.setReceiver(receiver);
-        sample.setInfo_id(10L);
-        sample.setSender(sender);
-        samp.add(sample);
-        ps.store(samp);
+        BigInteger jsp= new BigInteger(request.getParameter("jsp"));
+        BigInteger cs= new BigInteger(request.getParameter("cs"));
+        BigInteger se= new BigInteger(request.getParameter("se"));
+        BigInteger web= new BigInteger(request.getParameter("web"));
+        BigInteger english= new BigInteger(request.getParameter("english"));
+        BigInteger po= new BigInteger(request.getParameter("po"));
+        ps.purchase(1,jsp);
+        ps.purchase(2,cs);
+        ps.purchase(3,se);
+        ps.purchase(4,web);
+        ps.purchase(5,english);
+        ps.purchase(6,po);
         response.sendRedirect("PurchasingSystem/confirm.jsp");
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -5,6 +5,7 @@ import cn.bookmanage.entity.Book;
 import cn.bookmanage.entity.info;
 
 import javax.naming.NamingException;
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -35,4 +36,9 @@ public class PurchasingServices {
         MessageDao md=new MessageDao();
         md.store(sample);
     }
+    public int[] purchase(int id, BigInteger num){
+        MessageDao ms=new MessageDao();
+        return ms.purchase(6,num);
+    }
+
 }

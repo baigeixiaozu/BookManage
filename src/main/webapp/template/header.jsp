@@ -63,6 +63,9 @@
                         </li>
                     </ul>
                 </li>
+                <li class="menu-list">
+                    <a href="PurchasingSystem/purchase.jsp">购买操作</a>
+                </li>
             </ul>
         </nav>
         <div class="right">

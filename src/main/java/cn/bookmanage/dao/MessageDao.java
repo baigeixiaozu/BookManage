@@ -6,6 +6,7 @@ import cn.bookmanage.entity.info;
 import cn.bookmanage.utils.JNDIUtils;
 
 import javax.naming.NamingException;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -117,4 +118,47 @@ public class MessageDao {
             throwables.printStackTrace();
         }
     }
+    public static int[] purchase(int id, BigInteger num){
+        Connection connection = null;
+        String sql=null;
+
+         sql = "select buy_id from bm_buy where buy_verify_status=0 and book_id="+id+" order by book_id limit "+num;
+
+        ResultSet rs=null;
+        int[] a=new int[num.intValue()];
+        try {
+            connection = JNDIUtils.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            rs=ps.executeQuery();
+            int i=0;
+
+            while(rs.next()){
+                a[i++]=rs.getInt(1);
+            }
+            ps.close();
+            connection.close();
+
+        } catch (SQLException | NamingException throwables) {
+            throwables.printStackTrace();
+        }
+        int t=0;
+        for(int i=0;i<a.length;i++) {
+            t=a[i];
+            sql = "Update bm_buy set buy_verify_status=2  where buy_id=" + t;
+           try{
+               connection=JNDIUtils.getConnection();
+               PreparedStatement ps = connection.prepareStatement(sql);
+               ps.execute();
+                connection.close();
+           }
+           catch (SQLException | NamingException throwables) {
+               throwables.printStackTrace();
+           }
+        }
+        if(a.length!=0)
+        return a;
+        else
+            return null;
+    }
+
 }
