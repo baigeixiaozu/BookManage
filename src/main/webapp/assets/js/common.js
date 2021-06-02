@@ -50,7 +50,7 @@ const USER = function (){
             focusConfirm: false
         })
         // 发送 POST 请求
-        httpPost('LoginServlet', {
+        httpPost('Api/User/login', {
             username: uinfo.username.value,
             password: uinfo.password.value
         })
