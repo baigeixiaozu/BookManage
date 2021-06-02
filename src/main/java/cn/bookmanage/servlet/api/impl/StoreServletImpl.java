@@ -23,9 +23,8 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
 
     @Override
     public void queryAllAction() throws IOException {
-        User user = (User) request.getSession().getAttribute("user");
 
-        if (user == null) {
+        if (!checkUser()) {
             throw new BaseException(403, "权限不足");
         }
 
@@ -57,9 +56,7 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
 
     @Override
     public void queryInAction() throws IOException {
-        User user = (User) request.getSession().getAttribute("user");
-
-        if (user == null) {
+        if (!checkUser()) {
             throw new BaseException(403, "权限不足");
         }
 
@@ -89,9 +86,7 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
 
     @Override
     public void queryOutAction() throws IOException {
-        User user = (User) request.getSession().getAttribute("user");
-
-        if (user == null) {
+        if (!checkUser()) {
             throw new BaseException(403, "权限不足");
         }
 
@@ -116,5 +111,14 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
         }};
 
         response.getWriter().print(JsonUtil.obj2String(ret));
+    }
+
+    private boolean checkUser(){
+        User user = (User) request.getSession().getAttribute("user");
+
+        if (user == null) {
+            return false;
+        }
+        return user.getLevel() == 10 || user.getLevel() == 6;
     }
 }

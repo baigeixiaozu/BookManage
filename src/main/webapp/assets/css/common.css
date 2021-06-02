@@ -116,3 +116,10 @@ a {
 a:hover{
     color: black;
 }
+
+.markdown-body{
+    width: 90%;
+}
+.markdown-body table {
+    display: inline-table!important;
+}

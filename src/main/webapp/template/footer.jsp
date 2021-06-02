@@ -16,7 +16,7 @@
             这是页脚
         </div>
         <div class="foot-bar">
-            Copyright © 2016-2021 白给小组版权所有
+            Copyright © 2021-2021 白给小组版权所有
         </div>
     </footer>
 </body>
