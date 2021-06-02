@@ -160,5 +160,26 @@ public class MessageDao {
         else
             return null;
     }
+    public static Long search_id() {
+        Connection connection = null;
+        Long temp=0L;
+        String sql = "select * from bm_info group by info_id order by info_id  DESC limit 1" ;
+        ResultSet rs=null;
+        try {
+            connection = JNDIUtils.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            rs=ps.executeQuery();
+            rs.next();
+            temp=rs.getLong(1);
+            ps.close();
+            connection.close();
 
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return temp;
+    }
 }
+

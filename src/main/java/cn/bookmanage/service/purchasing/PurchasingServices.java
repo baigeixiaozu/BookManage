@@ -38,7 +38,10 @@ public class PurchasingServices {
     }
     public int[] purchase(int id, BigInteger num){
         MessageDao ms=new MessageDao();
-        return ms.purchase(6,num);
+        return ms.purchase(id,num);
     }
-
+    public Long search_id(){
+        MessageDao ms=new MessageDao();
+        return ms.search_id();
+    }
 }
