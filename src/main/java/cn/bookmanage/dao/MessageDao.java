@@ -101,10 +101,6 @@ public class MessageDao {
     }
     public static void store(ArrayList<info> sample)  {//将需要购买的消息存入数据库
         Connection connection = null;
-        PurchasingServices p=new PurchasingServices();
-        Long te=p.search_id();
-        if(te==null)
-            te=0L;
        String sql = "insert into bm_info(info_id,content,time,receiver,sender,read_state) values(?,?,?,?,?,?)";
         try {
             int i=0;
@@ -113,7 +109,7 @@ public class MessageDao {
                 PreparedStatement ps = connection.prepareStatement(sql);
                 Long t=(sample.get(i).getInfo_id());
                 int tem=Integer.valueOf(t.toString());
-                ps.setInt(1,tem+te.intValue());
+                ps.setInt(1,tem);
                 String temp=sample.get(i).getContent();
                 ps.setString(2,temp);
                 Date date=new Date();

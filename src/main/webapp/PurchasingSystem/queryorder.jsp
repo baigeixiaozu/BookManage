@@ -43,15 +43,19 @@
 <% request.setCharacterEncoding("UTF-8");%>
 <%
     User user=(User)request.getSession().getAttribute("user");
-    if(user==null)
+    if(user==null){
         response.sendRedirect("denied.jsp");
+    }
     else if(user.getLevel()==1)
         response.sendRedirect("denied.jsp");
     PurchasingServices ps=new PurchasingServices();
     ArrayList<info> sample= ps.fetch();
     ps.store(sample);
     int level=0;
+    if(user!=null)
     level=user.getLevel();
+    if(user==null)
+        level=1;
     sample=ps.fetch_i(level);
     //for(int i=0;i<sample.size();i++){
     //    out.print(sample.get(i).getContent()+"<br/>");}
