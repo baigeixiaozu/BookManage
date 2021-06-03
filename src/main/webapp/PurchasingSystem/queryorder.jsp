@@ -42,12 +42,17 @@
 <% response.setCharacterEncoding("UTF-8");%>
 <% request.setCharacterEncoding("UTF-8");%>
 <%
-
+    User user=(User)request.getSession().getAttribute("user");
+    if(user==null)
+        response.sendRedirect("denied.jsp");
+    else if(user.getLevel()==1)
+        response.sendRedirect("denied.jsp");
     PurchasingServices ps=new PurchasingServices();
     ArrayList<info> sample= ps.fetch();
-    if(sample==null)
-        sample=ps.fetch_i();//如果此时purchase里面的数据被删除了
     ps.store(sample);
+    int level=0;
+    level=user.getLevel();
+    sample=ps.fetch_i(level);
     //for(int i=0;i<sample.size();i++){
     //    out.print(sample.get(i).getContent()+"<br/>");}
     //if(sample.size()==0)

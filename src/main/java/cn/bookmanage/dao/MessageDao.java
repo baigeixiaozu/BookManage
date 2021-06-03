@@ -3,6 +3,7 @@ package cn.bookmanage.dao;
 import cn.bookmanage.entity.Book;
 import cn.bookmanage.entity.User;
 import cn.bookmanage.entity.info;
+import cn.bookmanage.service.purchasing.PurchasingServices;
 import cn.bookmanage.utils.JNDIUtils;
 
 import javax.naming.NamingException;
@@ -37,8 +38,8 @@ public class MessageDao {
                     sample.setContent(content);
                     sample.setInfo_id(id);
                     sample.setRead_status(0);
-                    sample.setSender("管理员");
-                    sample.setReceiver("采购部");
+                    sample.setSender("超级管理员");
+                    sample.setReceiver("采购员");
                     samp.add(sample);
                 }
                 ps.close();
@@ -51,13 +52,22 @@ public class MessageDao {
         }
         return samp;
     }
-    public static ArrayList<info> fetch_i() {
+    public static ArrayList<info> fetch_i(int level) {
         Connection connection = null;
         ArrayList<info> samp=new ArrayList<info>();
         info sample=null;
-        String sql = "select * from bm_info where read_state=0 ";
+        String sql = null;
         ResultSet rs=null;
+        System.out.print(level);
         try {
+            if(level==10){
+               sql = "select * from bm_info where read_state=0 ";}
+            else if(level==6){
+                sql = "select * from bm_info where read_state=0 and receiver='采购员'";
+            }
+            else{
+               sql = "select * from bm_info where read_state=0 and receiver='订书员'";
+            }
             connection = JNDIUtils.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
             rs=ps.executeQuery();
@@ -91,6 +101,10 @@ public class MessageDao {
     }
     public static void store(ArrayList<info> sample)  {//将需要购买的消息存入数据库
         Connection connection = null;
+        PurchasingServices p=new PurchasingServices();
+        Long te=p.search_id();
+        if(te==null)
+            te=0L;
        String sql = "insert into bm_info(info_id,content,time,receiver,sender,read_state) values(?,?,?,?,?,?)";
         try {
             int i=0;
@@ -99,15 +113,15 @@ public class MessageDao {
                 PreparedStatement ps = connection.prepareStatement(sql);
                 Long t=(sample.get(i).getInfo_id());
                 int tem=Integer.valueOf(t.toString());
-                ps.setInt(1,tem);
+                ps.setInt(1,tem+te.intValue());
                 String temp=sample.get(i).getContent();
                 ps.setString(2,temp);
                 Date date=new Date();
                 java.sql.Date sqlDate = new java.sql.Date(date.getTime());
                 PreparedStatement pst = connection.prepareStatement(sql);
                 ps.setDate(3, sqlDate);
-                ps.setString(4,"采购员");
-                ps.setString(5,"管理员");
+                ps.setString(4,sample.get(i).getReceiver());
+                ps.setString(5,sample.get(i).getSender());
                 ps.setInt(6,0);
                 ps.execute();
                 ps.close();

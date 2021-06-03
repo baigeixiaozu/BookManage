@@ -1,4 +1,4 @@
-<%--
+<%@ page import="cn.bookmanage.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: Surface
   Date: 2021/6/1
@@ -45,7 +45,13 @@
   </style>
 </head>
 <body>
-
+<%
+  User user=(User)request.getSession().getAttribute("user");
+  if(user==null)
+    response.sendRedirect("denied.jsp");
+  else if(user.getLevel()==1)
+    response.sendRedirect("denied.jsp");
+%>
 <div class="container">
   <form action="http://localhost:8080/BookManage_war_exploded/orderconfirm" method="post">
     <label for="jsp">JSP实用教程（第4版）</label>

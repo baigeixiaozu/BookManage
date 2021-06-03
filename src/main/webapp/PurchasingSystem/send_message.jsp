@@ -1,4 +1,4 @@
-<%--
+<%@ page import="cn.bookmanage.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: Surface
   Date: 2021/5/31
@@ -46,23 +46,29 @@
 </head>
 <body>
 
-
+<%
+    User user=(User)request.getSession().getAttribute("user");
+    if(user==null)
+        response.sendRedirect("denied.jsp");
+    else if(user.getLevel()==1)
+        response.sendRedirect("denied.jsp");
+%>
 <div class="container">
-    <form action="http://localhost:8080/BookManage_war_exploded/confirm" method="post">
+    <form action="http://localhost:8080/BookManage_war_exploded/purchaseServlet" method="post">
         <label for="content">内容</label>
         <input type="text" id="content" name="content" placeholder="content">
 
-        <label for="receiver">Country</label>
+        <label for="receiver">接收方</label>
         <select id="receiver" name="receiver">
-            <option value="超级管理员">超级管理员</option>
-            <option value="采购员">采购员</option>
-            <option value="订书员">订书员</option>
+            <option name="超级管理员" value="超级管理员">超级管理员</option>
+            <option name="采购员" value="采购员">采购员</option>
+            <option name="订书员" value="订书员">订书员</option>
         </select>
-        <label for="sender">Country</label>
+        <label for="sender">发送方</label>
         <select id="sender" name="sender">
-            <option value="超级管理员">超级管理员</option>
-            <option value="采购员">采购员</option>
-            <option value="订书员">订书员</option>
+            <option name="超级管理员" value="超级管理员">超级管理员</option>
+            <option name="采购员" value="采购员">采购员</option>
+            <option name="订书员" value="订书员">订书员</option>
         </select>
         <input type="submit" value="Submit">
     </form>

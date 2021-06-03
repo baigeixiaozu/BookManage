@@ -21,10 +21,10 @@ public class PurchasingServices {
             return sample;
         }
         }
-    public ArrayList<info> fetch_i(){
+    public ArrayList<info> fetch_i(int level){
         ArrayList<info> sample=new ArrayList<info>();
         MessageDao md=new MessageDao();
-        sample=md.fetch_i();
+        sample=md.fetch_i(level);
         if(sample==null){
             return null;
         }
