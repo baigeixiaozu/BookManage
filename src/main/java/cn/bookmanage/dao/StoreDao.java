@@ -83,7 +83,7 @@ public class StoreDao {
      * @param orderInfo 排序参数 {排序的列, 排序方式}
      * @return List -- [total, recordList]
      */
-    public static List<Object> queryInOut(int page, int count, int type, int[] orderInfo){
+    public static List<Object> queryInOut(int page, int count, int type, int[] orderInfo, String[] time){
         Connection connection = null;
 
         String[] table = {"in", "out"};
@@ -94,9 +94,16 @@ public class StoreDao {
         try{
             connection = JNDIUtils.getConnection();
 
+            Object[] p = null;
+
             // 取总数
             String sql = "SELECT COUNT(1) FROM bm_" + table[type];
-            ResultSet rs = JNDIUtils.executeQuery(connection, sql, null);
+            if(time!=null){
+                p = new Object[]{time[0], time[1]};
+                sql += " WHERE " + table[type] + "_time>=? AND " + table[type] + "_time<=? ";
+            }
+
+            ResultSet rs = JNDIUtils.executeQuery(connection, sql, p);
             while (rs.next()){
                 total = rs.getInt(1);
             }
@@ -104,13 +111,25 @@ public class StoreDao {
 
             // 务必保持列的顺序与前端一致，否则会造成排序数据显示异常
             sql = "SELECT " + table[type] + "_id, book_name, "  + table[type] + "_count, "  + table[type] + "_time" +
-                    " FROM `bm_" + table[type] + "` LEFT JOIN bm_book ON bm_" + table[type] + ".book_id=bm_book.book_id " +
-                    "ORDER BY " + orderInfo[0] + " " + orderType[orderInfo[1]] +
+                    " FROM `bm_" + table[type] + "` LEFT JOIN bm_book ON bm_" + table[type] + ".book_id=bm_book.book_id ";
+            if(time!=null) {
+                sql += "WHERE " + table[type] + "_time>=? AND " + table[type] + "_time<=? ";
+            }
+            sql += "ORDER BY " + orderInfo[0] + " " + orderType[orderInfo[1]] +
                     " LIMIT ?,?";
-            Integer[] p = new Integer[]{
-                    (page - 1) * count,
-                    count
-            };
+            if (time != null) {
+                p = new Object[]{
+                        time[0],
+                        time[1],
+                        (page - 1) * count,
+                        count
+                };
+            }else {
+                p = new Object[]{
+                        (page - 1) * count,
+                        count
+                };
+            }
             rs = JNDIUtils.executeQuery(connection, sql, p);
             while (rs.next()){
                 ResultSet finalRs = rs;

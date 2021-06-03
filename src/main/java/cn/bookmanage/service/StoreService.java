@@ -12,6 +12,6 @@ import java.util.Map;
  **/
 public interface StoreService {
     Map<String, Object> queryAll(int page, int count, String order);
-    List<Object> queryIn(int page, int count, String order);
-    List<Object> queryOut(int page, int count);
+    List<Object> queryIn(int page, int count, String order, String[] time);
+    List<Object> queryOut(int page, int count, String order, String[] time);
 }
