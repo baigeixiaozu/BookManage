@@ -21,10 +21,10 @@ public class PurchasingServices {
             return sample;
         }
         }
-    public ArrayList<info> fetch_i(){
+    public ArrayList<info> fetch_i(int level){
         ArrayList<info> sample=new ArrayList<info>();
         MessageDao md=new MessageDao();
-        sample=md.fetch_i();
+        sample=md.fetch_i(level);
         if(sample==null){
             return null;
         }
@@ -38,7 +38,10 @@ public class PurchasingServices {
     }
     public int[] purchase(int id, BigInteger num){
         MessageDao ms=new MessageDao();
-        return ms.purchase(6,num);
+        return ms.purchase(id,num);
     }
-
+    public Long search_id(){
+        MessageDao ms=new MessageDao();
+        return ms.search_id();
+    }
 }

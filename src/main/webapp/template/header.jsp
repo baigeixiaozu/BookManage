@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html>
+<html lang="en">
 <head>
     <title>${param.title!=null?param.title:"教材订购系统"} - 教材订购系统</title>
     <base href="${pageContext.request.contextPath}/">
@@ -92,4 +92,5 @@
                 document.getElementById("index").classList.add("active")
         </script>
     </header>
-    <section class="main-body"></section>
+    <%--  勿动，此处闭合在footer.jsp第10行，idea无法识别  --%>
+    <section class="main-body">

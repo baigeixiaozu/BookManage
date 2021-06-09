@@ -1,10 +1,7 @@
 package cn.bookmanage.filter;
 
-import cn.bookmanage.HttpSessionForbidden;
-
 import javax.servlet.*;
 import javax.servlet.annotation.*;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @WebFilter(
@@ -26,8 +23,6 @@ public class ApiFilter implements Filter {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=utf-8");
-        // 禁用SESSION（TODO: 非jsp页面似乎不必要？待确认。）
-        HttpServletRequest HttpRequest = new HttpSessionForbidden((HttpServletRequest) request);
 
         chain.doFilter(request, response);  // 放行
     }

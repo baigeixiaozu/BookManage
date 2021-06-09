@@ -23,9 +23,8 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
 
     @Override
     public void queryAllAction() throws IOException {
-        User user = (User) request.getSession().getAttribute("user");
 
-        if (user == null) {
+        if (!checkUser()) {
             throw new BaseException(403, "权限不足");
         }
 
@@ -57,9 +56,7 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
 
     @Override
     public void queryInAction() throws IOException {
-        User user = (User) request.getSession().getAttribute("user");
-
-        if (user == null) {
+        if (!checkUser()) {
             throw new BaseException(403, "权限不足");
         }
 
@@ -68,8 +65,15 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
         if(order==null)order="1,0";
         int curPage = p==null||p.length()==0?1:Integer.parseInt(p);
         int count = 10;
+
+        String startDate = request.getParameter("start");
+        String endDate = request.getParameter("end");
+        String[] time = null;
+        if(startDate!=null&&endDate!=null && startDate.length() == 19 && endDate.length() == 19&& startDate.compareTo(endDate) < 0){
+            time = new String[]{startDate, endDate};
+        }
         StoreService ss = new StoreServiceImpl();
-        List<Object> data = ss.queryIn(curPage, count, order);
+        List<Object> data = ss.queryIn(curPage, count, order, time);
         List<StoreRecord> records = (List<StoreRecord>)data.get(1);
         int total = (int)data.get(0);
         int pageCnt = total/count + 1;
@@ -89,17 +93,24 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
 
     @Override
     public void queryOutAction() throws IOException {
-        User user = (User) request.getSession().getAttribute("user");
-
-        if (user == null) {
+        if (!checkUser()) {
             throw new BaseException(403, "权限不足");
         }
 
         String p = request.getParameter("page");
+        String order = request.getParameter("order");
+        if(order==null)order="1,0";
         int curPage = p==null||p.length()==0?1:Integer.parseInt(p);
         int count = 10;
+
+        String startDate = request.getParameter("start");
+        String endDate = request.getParameter("end");
+        String[] time = null;
+        if(startDate!=null&&endDate!=null && startDate.length() == 19 && endDate.length() == 19&& startDate.compareTo(endDate) < 0){
+            time = new String[]{startDate, endDate};
+        }
         StoreService ss = new StoreServiceImpl();
-        List<Object> data = ss.queryOut(curPage, count);
+        List<Object> data = ss.queryOut(curPage, count, order, time);
         List<StoreRecord> records = (List<StoreRecord>)data.get(1);
         int total = (int)data.get(0);
 
@@ -116,5 +127,14 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
         }};
 
         response.getWriter().print(JsonUtil.obj2String(ret));
+    }
+
+    private boolean checkUser(){
+        User user = (User) request.getSession().getAttribute("user");
+
+        if (user == null) {
+            return false;
+        }
+        return user.getLevel() == 10 || user.getLevel() == 6;
     }
 }

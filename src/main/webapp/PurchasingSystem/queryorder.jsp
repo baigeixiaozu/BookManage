@@ -42,17 +42,46 @@
 <% response.setCharacterEncoding("UTF-8");%>
 <% request.setCharacterEncoding("UTF-8");%>
 <%
-
+    User user=(User)request.getSession().getAttribute("user");
+    if(user==null){
+        response.sendRedirect("denied.jsp");
+    }
+    else if(user.getLevel()==1)
+        response.sendRedirect("denied.jsp");
     PurchasingServices ps=new PurchasingServices();
     ArrayList<info> sample= ps.fetch();
-    if(sample==null)
-        sample=ps.fetch_i();//如果此时purchase里面的数据被删除了
     ps.store(sample);
-    for(int i=0;i<sample.size();i++){
-        out.print(sample.get(i).getContent()+"<br/>");}
-    if(sample.size()==0)
-        out.print("当前无采购任务");
+    int level=0;
+    if(user!=null)
+    level=user.getLevel();
+    if(user==null)
+        level=1;
+    sample=ps.fetch_i(level);
+    //for(int i=0;i<sample.size();i++){
+    //    out.print(sample.get(i).getContent()+"<br/>");}
+    //if(sample.size()==0)
+    //    out.print("当前无采购任务");
 %>
-
+<link rel="stylesheet" href="assets/css/github-markdown.css">
+<article class="markdown-body">
+    <table>
+        <thead>
+        <tr>
+            <td>序号</td>
+            <td>内容</td>
+            <td>发送者</td>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="<%=sample%>" var="samp" varStatus="s">
+            <tr>
+                <td>${samp.info_id}</td>
+                <td>${samp.content}</td>
+                <td>${samp.sender}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</article>
 </body>
 </html>

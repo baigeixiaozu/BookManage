@@ -3,6 +3,7 @@ package cn.bookmanage.dao;
 import cn.bookmanage.entity.Book;
 import cn.bookmanage.entity.User;
 import cn.bookmanage.entity.info;
+import cn.bookmanage.service.purchasing.PurchasingServices;
 import cn.bookmanage.utils.JNDIUtils;
 
 import javax.naming.NamingException;
@@ -37,8 +38,8 @@ public class MessageDao {
                     sample.setContent(content);
                     sample.setInfo_id(id);
                     sample.setRead_status(0);
-                    sample.setSender("管理员");
-                    sample.setReceiver("采购部");
+                    sample.setSender("超级管理员");
+                    sample.setReceiver("采购员");
                     samp.add(sample);
                 }
                 ps.close();
@@ -51,13 +52,22 @@ public class MessageDao {
         }
         return samp;
     }
-    public static ArrayList<info> fetch_i() {
+    public static ArrayList<info> fetch_i(int level) {
         Connection connection = null;
         ArrayList<info> samp=new ArrayList<info>();
         info sample=null;
-        String sql = "select * from bm_info where read_state=0 ";
+        String sql = null;
         ResultSet rs=null;
+        System.out.print(level);
         try {
+            if(level==10){
+               sql = "select * from bm_info where read_state=0 ";}
+            else if(level==6){
+                sql = "select * from bm_info where read_state=0 and receiver='采购员'";
+            }
+            else{
+               sql = "select * from bm_info where read_state=0 and receiver='订书员'";
+            }
             connection = JNDIUtils.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
             rs=ps.executeQuery();
@@ -106,8 +116,8 @@ public class MessageDao {
                 java.sql.Date sqlDate = new java.sql.Date(date.getTime());
                 PreparedStatement pst = connection.prepareStatement(sql);
                 ps.setDate(3, sqlDate);
-                ps.setString(4,"采购员");
-                ps.setString(5,"管理员");
+                ps.setString(4,sample.get(i).getReceiver());
+                ps.setString(5,sample.get(i).getSender());
                 ps.setInt(6,0);
                 ps.execute();
                 ps.close();
@@ -160,5 +170,26 @@ public class MessageDao {
         else
             return null;
     }
+    public static Long search_id() {
+        Connection connection = null;
+        Long temp=0L;
+        String sql = "select * from bm_info group by info_id order by info_id  DESC limit 1" ;
+        ResultSet rs=null;
+        try {
+            connection = JNDIUtils.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            rs=ps.executeQuery();
+            rs.next();
+            temp=rs.getLong(1);
+            ps.close();
+            connection.close();
 
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return temp;
+    }
 }
+

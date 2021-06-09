@@ -25,7 +25,7 @@
         return;
     }
 %>
-<c:if test="${sessionScope.user.level!=10}">
+<c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=6}">
     <jsp:forward page="../error/403.jsp" />
 </c:if>
 
@@ -49,6 +49,8 @@
         }
     </style>
     <h2>这是出库查询页面</h2>
+    起始日期：<input id="startDate" type="datetime-local" placeholder="" />
+    &nbsp;&nbsp;&nbsp;结束日期：<input id="endDate" type="datetime-local" placeholder="" />
     <table>
         <thead>
         <tr id="tableHead">

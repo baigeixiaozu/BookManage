@@ -18,7 +18,27 @@
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="个人信息"/>
 </jsp:include>
-
-<h2 style="color: red">该页面仅供检测登录是否正常而用，尚无实际功能</h2>
+<link rel="stylesheet" href="assets/css/github-markdown.css">
+<article class="markdown-body">
+    <h2 style="color: red">个人基础信息</h2>
+    <table>
+        <thead>
+        <tr>
+            <td>id</td>
+            <td>登录名</td>
+            <td>昵称</td>
+            <td>权限标识</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>${sessionScope.user.id}</td>
+            <td>${sessionScope.user.login}</td>
+            <td>${sessionScope.user.nickname}</td>
+            <td>${sessionScope.user.level}</td>
+        </tr>
+        </tbody>
+    </table>
+</article>
 
 <jsp:include page="../template/footer.jsp" />

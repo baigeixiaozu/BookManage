@@ -26,7 +26,7 @@
         return;
     }
 %>
-<c:if test="${sessionScope.user.level!=10}">
+<c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=6}">
     <jsp:forward page="../error/403.jsp" />
 </c:if>
 <%--权限检查END--%>

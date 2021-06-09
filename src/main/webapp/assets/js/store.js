@@ -5,14 +5,19 @@ const tableBody = function (){
     let curPage = 1;
     let totalPage;
     let order = [1, 0];
+    let startDate = null, endDate = null;
 
     let init = (type)=>{
         queryType = type;
         query(1);
         orderEvent();
+        DateEvent();
+        pageNav();
     }
     let query = (page)=>{
         httpGet(API + queryType, {
+            start: startDate,
+            end: endDate,
             page: page,
             order: order.join()
         }).then(res=>{
@@ -51,33 +56,36 @@ const tableBody = function (){
         const pre = $("#page-nav #pre");
         const next = $("#page-nav #next");
         pre[0].disabled = curPage <= 1;
+        next[0].disabled = curPage >= totalPage;
 
         pre.on("click", function(){
-            curPage--;
+            if(curPage-1>0) {
+                curPage--;
+                query(curPage)
+            }
             pre[0].disabled = curPage <= 1;
-            next[0].disabled = false;
-            query(curPage)
+            next[0].disabled = curPage >= totalPage;
 
         })
         next.on("click", function(){
-            curPage++
-            pre[0].disabled = false;
+            if(curPage+1<=totalPage) {
+                curPage++
+                query(curPage)
+            }
+            pre[0].disabled = curPage <= 1;
             next[0].disabled = curPage >= totalPage;
-            query(curPage)
         })
     }
     let middleNav = ()=>{
         const middle = $("#page-nav>#middle");
-        if(middle.children().length === 0) {
-            pageNav();
-            for (let i = 1; i <= totalPage; i++) {
-                middle.append(`<button>${i}</button>`);
-                middle.children()[i-1].onclick = function () {
-                    curPage = i;
-                    document.getElementById("pre").disabled = curPage <= 1;
-                    document.getElementById("next").disabled = curPage >= totalPage;
-                    query(i)
-                }
+        middle.empty()
+        for (let i = 1; i <= totalPage; i++) {
+            middle.append(`<button>${i}</button>`);
+            middle.children()[i-1].onclick = function () {
+                curPage = i;
+                document.getElementById("pre").disabled = curPage <= 1;
+                document.getElementById("next").disabled = curPage >= totalPage;
+                query(i)
             }
         }
 
@@ -86,6 +94,8 @@ const tableBody = function (){
             disabled[0].disabled = false
         $("#page-nav #middle button")[curPage - 1].disabled = true;
 
+        $("#page-nav #pre")[0].disabled = curPage <= 1;
+        $("#page-nav #next")[0].disabled = curPage >= totalPage;
     }
     let orderEvent = ()=>{
         const thead = $("#tableHead").children();
@@ -105,6 +115,25 @@ const tableBody = function (){
                 query(1)
             }
         }
+    }
+    let DateEvent = ()=>{
+        document.getElementById("startDate").onchange = e=>{
+            let date = new Date(e.target.value);
+            startDate = convertDate(date);
+        }
+        document.getElementById("endDate").onchange = e=>{
+            let date = new Date(e.target.value);
+            endDate = convertDate(date);
+            query(1);
+        }
+    }
+    let convertDate = (date = new Date())=>{
+        let month = date.getMonth()<9?'0'+(date.getMonth()+1):(date.getMonth()+1);
+        let day = date.getDate()<10?'0'+date.getDate():date.getDate();
+        let hour = date.getHours()<10?'0'+date.getHours():date.getHours();
+        let m = date.getMinutes()<10?'0'+date.getMinutes():date.getMinutes();
+        let s = date.getSeconds()<10?'0'+date.getSeconds():date.getSeconds();
+        return `${date.getFullYear()}-${month}-${day} ${hour}:${m}:${s}`;
     }
     return {
         init: init

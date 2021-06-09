@@ -1,5 +1,6 @@
 package cn.bookmanage.servlet;
 
+import cn.bookmanage.entity.User;
 import cn.bookmanage.entity.info;
 import cn.bookmanage.service.purchasing.PurchasingServices;
 
@@ -24,7 +25,9 @@ public class purchaseServlet extends HttpServlet {
         sample.setTime(null);
         sample.setContent(content);
         sample.setReceiver(receiver);
-        sample.setInfo_id(10L);
+        Long temp=ps.search_id();
+        temp++;
+        sample.setInfo_id(temp);
         sample.setSender(sender);
         samp.add(sample);
         ps.store(samp);
