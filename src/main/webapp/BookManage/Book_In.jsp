@@ -6,9 +6,111 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
+    <title>${param.title!=null?param.title:"教材订购系统"} - 教材订购系统</title>
+    <base href="${pageContext.request.contextPath}/">
+    <link rel="stylesheet" href="assets/css/common.css" />
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<header id="header">
+    <nav id="header-nav" class="header-nav">
+        <ul>
+            <li><a id="index" href="index.jsp">首页</a></li>
+            <li class="menu-list">
+                <span id="store">库存</span>
+                <ul class="menu-list-sub">
+                    <li>
+                        <a href="store/queryAll.jsp" >全部</a>
+                    </li>
+                    <li>
+                        <a href="store/queryIn.jsp" >入库</a>
+                    </li>
+                    <li>
+                        <a href="store/queryOut.jsp" >出库</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-list">
+                <span id="example">例子菜单</span>
+                <ul class="menu-list-sub">
+                    <li>
+                        <a href="" >子项1</a>
+                    </li>
+                    <li>
+                        <a href="" >子项2</a>
+                    </li>
+                    <li>
+                        <a href="" >子项3</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="MarketingSystem/queryMarketingSystem.jsp">销售系统</a>
+            </li>
+            <li class="menu-list">
+                <span id="message">库存</span>
+                <ul class="menu-list-sub">
+                    <li>
+                        <a href="PurchasingSystem/queryorder.jsp" >查看消息</a>
+                    </li>
+                    <li>
+                        <a href="PurchasingSystem/send_message.jsp" >发消息</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-list">
+                <span id="BookManage">书库管理</span>
+                <ul class="menu-list-sub">
+                    <li>
+                        <a href="Book_In.jsp">书籍入库</a>
+                    </li>
+                    <li>
+                        <a href="Book_Out.jsp">书籍出库</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-list">
+                <a href="PurchasingSystem/purchase.jsp">购买操作</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="right">
+        <c:choose>
+            <c:when test="${sessionScope.user!=null}">
+                <a id="user-info-link" href="user/info.jsp">${sessionScope.user.nickname}</a> |
+                <a onclick="USER.logout()" style="cursor: pointer;">注销</a>
+            </c:when>
+            <c:otherwise>
+                <a href="login.jsp">登录</a>
+            </c:otherwise>
+        </c:choose>
+    </div>
+    <script>
+        let path = location.pathname;
+        console.log(path);
+        if(path.includes("index.jsp"))
+            document.getElementById("index").classList.add("active")
+        else if(path.includes("store"))
+            document.getElementById("store").classList.add("active")
+        else if(path.includes("user/info.jsp"))
+            document.getElementById("user-info-link").classList.add("active")
+        else
+            document.getElementById("index").classList.add("active")
+    </script>
+</header>
+<section class="main-body"></section>
+
+<html>
+
+<head>
     <title>教材入库</title>
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class=side></div>
@@ -25,66 +127,30 @@
             <table>
                 <tr id="title">
                     <th colspan=2>书名</th>
-                    <th colspan=2>库存</th>
                     <th colspan=2>新增数量</th>
-                    <th colspan=2>新增后库存</th>
                 </tr>
                 <tr>
-                    <td>JSP实用教程（第4版）</td>
-                    <td>10</td>
                     <td><input type=text></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>计算机组成原理微课版</td>
-                    <td>0</td>
-                    <td><input type=text> </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>软件工程：实践者的研究方法（原书第8版）（本科教学版）</td>
-                    <td>0</td>
                     <td><input type=text></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>web前端设计基础——html5、css3、java（二版）</td>
-                    <td>0</td>
-                    <td><input type=text></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>新目标大学英语系列教材：科技英语教程学生用书</td>
-                    <td>0</td>
-                    <td><input type=text></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>概率论与数理统计及其应用（第2版）</td>
-                    <td>0</td>
-                    <td><input type=text></td>
-                    <td></td>
                 </tr>
             </table>
         </div>
         <div class=count></div>
     </div>
-    <div class=newBook>
-        <table>
-            <tr>
-                <th>新增书名</th>
-                <th>数量</th>
-            </tr>
-            <tr>
-                <td><input type=text></td>
-                <td><input type=text></td>
-            </tr>
-        </table>
-    </div>
 </div>
 <div class=button>
+    <input type=button onclick="addInput();" value="新增一行"/>
     <input type=submit value="提交">
     <input type=reset value="重置">
 </div>
+<script type="text/javascript">
+    function addInput(){
+        var input1="";
+        input +="<input type=text>";
+        input +="<input type=text><br>";
+        $('#')
+    }
+</script>
 </body>
 </html>
+
