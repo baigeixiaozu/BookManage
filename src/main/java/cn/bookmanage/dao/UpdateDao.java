@@ -21,7 +21,6 @@ public class UpdateDao {
                 ps.setInt(2, (int) book.getId());
                 ps.execute();
 
-
                 String sqlNum1 = "select book_count from bm_book where book_id=" + book.getId();
                 String sqlNum2 = "select  count(*) as count from bm_buy where book_id= " + book.getId();
                 PreparedStatement ps1 = connection.prepareStatement(sqlNum1);
