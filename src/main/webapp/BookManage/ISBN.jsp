@@ -1,15 +1,20 @@
 <%--
   Created by IntelliJ IDEA.
   User: ASUS
-  Date: 2021/5/13
-  Time: 21:19
+  Date: 2021/6/14
+  Time: 16:29
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html>
+<html lang="en">
 <head>
     <title>${param.title!=null?param.title:"教材订购系统"} - 教材订购系统</title>
     <base href="${pageContext.request.contextPath}/">
@@ -65,17 +70,6 @@
                 </ul>
             </li>
             <li class="menu-list">
-                <span id="BookManage">书库管理</span>
-                <ul class="menu-list-sub">
-                    <li>
-                        <a href="Book_In.jsp">书籍入库</a>
-                    </li>
-                    <li>
-                        <a href="Book_Out.jsp">书籍出库</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="menu-list">
                 <a href="PurchasingSystem/purchase.jsp">购买操作</a>
             </li>
         </ul>
@@ -104,52 +98,23 @@
             document.getElementById("index").classList.add("active")
     </script>
 </header>
-<section class="main-body"></section>
+<%--  勿动，此处闭合在footer.jsp第10行，idea无法识别  --%>
+<section class="main-body">
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html>
-
-<head>
-    <title>教材入库</title>
-    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-<div class=side></div>
-<div class=Title>
-    <div class=name></div>
-    <div class=time></div>
-</div>
-<div class=navigation>
-    <table></table>
-</div>
-<div class=book>
-        <h1>图书基本信息录入</h1>
-        <div class=text>
-            <table>
-                <tr id="title">
-                    <th >书名</th>
-                    <th >作者</th>
-                    <th >出版社</th>
-                    <th >价格</th>
-                    <th >数量</th>
-
-                </tr>
-                <tr>
-                    <td><input type=text ></td>
-                    <td><input type=text ></td>
-                    <td><input type=text ></td>
-                    <td><input type=text ></td>
-                    <td><input type=text ></td>
-                </tr>
-            </table>
-        </div>
-        <div class=count></div>
-</div>
-<div class=button>
-    <input type=submit value="下一步" onclick=window.location.href="ISBN.jsp">
-    <input type=reset value="重置">
-</div>
-
-
+</section>
+<script src="assets/js/sweetalert2.all.min.js"></script>
+<%--    <script src="assets/js/jquery-3.6.0.min.js"></script>--%>
+<script src="assets/js/common.js" charset="utf-8"></script>
+<footer>
+    <div class="footer-content">
+        这是页脚
+    </div>
+    <div class="foot-bar">
+        Copyright © 2021-2021 白给小组版权所有
+    </div>
+</footer>
 </body>
 </html>
-
+</body>
+</html>
