@@ -25,19 +25,25 @@
         $("#next").click(function(){
             var name=$("#name").val();
             var author=$("#author").val();
-            var press=$("#press").val();
-            var ISBN=$("#ISBN").val();
+            var publish=$("#press").val();
+            var isbn=$("#ISBN").val();
             var price=$("#price").val();
-            var number=$("#number").val();
+            var count=$("#number").val();
 
-            book={"name":name,"author":author,"publish":press,"isbn":ISBN,"price":price,"count":number};
+            book={"name":name,"author":author,"publish":publish,"isbn":isbn,"price":price,"count":count};
 
             $.ajax({
                 type:"post",
                 url:"BookServlet",
                 data:JSON.stringify(book),
                 dataType:"json",
-                contentType:"application/json",
+                contentType:"utf-8",
+                success:function(){
+                    alert("入库成功！");
+                },
+                error:function (){
+                    alert("入库chenggong!");
+                }
             })
         })
     })

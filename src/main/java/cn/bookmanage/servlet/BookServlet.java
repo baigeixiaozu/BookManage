@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="BookServlet",value = "/BookServlet")
+@WebServlet(name="BookServlet",urlPatterns ={"/BookServlet"} )
 public class BookServlet extends HttpServlet{
     public void init(ServletConfig config)throws ServletException{
         super.init(config);
@@ -23,6 +23,8 @@ public class BookServlet extends HttpServlet{
     }
 
     public void doPost(HttpServletRequest servletRequest,HttpServletResponse servletResponse)throws IOException{
+        servletResponse.setContentType("text/html;charset=utf-8");
+        servletRequest.setCharacterEncoding("utf-8");
         ServletInputStream inputStream=servletRequest.getInputStream();
 
         String json=null;
@@ -34,5 +36,6 @@ public class BookServlet extends HttpServlet{
         Book book=mapper.readValue(json,Book.class);
 
         BookService.BookIO(book);
+
     }
 }

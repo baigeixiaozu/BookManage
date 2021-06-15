@@ -5,11 +5,11 @@ import cn.bookmanage.entity.Book;
 
 public class BookService {
     public static void BookIO(Book book){
-        if(book.getAuthor()!=null){
+        if(!book.getAuthor().equals("")){
             BookDao.BookIn(book);
         }
         else{
-            book=BookDao.BookOut(book);
+            BookDao.BookOut(book);
         }
     }
 }

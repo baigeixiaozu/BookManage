@@ -67,10 +67,10 @@
                     <span id="BookManage">书库管理</span>
                     <ul class="menu-list-sub">
                         <li>
-                            <a href="Book_In.jsp">书籍入库</a>
+                            <a href="BookManage/Book_In.jsp">书籍入库</a>
                         </li>
                         <li>
-                            <a href="Book_Out.jsp">书籍出库</a>
+                            <a href="BookManage/Book_Out.jsp">书籍出库</a>
                         </li>
                     </ul>
                 </li>
