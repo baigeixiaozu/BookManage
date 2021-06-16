@@ -20,7 +20,7 @@
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%
+<%
     User user = (User) request.getSession().getAttribute("user");
     String req = request.getRequestURI();
     String query = request.getQueryString();
@@ -33,10 +33,8 @@
         response.sendRedirect("../error/401.jsp?redirect=" + redirect);
         return;
     }
-%>--%>
-<%--<c:if test="${sessionScope.user.level!=10}">
-    <jsp:forward page="../error/403.jsp" />
-</c:if>--%>
+%>
+
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="销售系统"/>
 </jsp:include>
@@ -86,3 +84,4 @@
 </div>
 </body>
 </html>
+<jsp:include page="../template/footer.jsp" />
