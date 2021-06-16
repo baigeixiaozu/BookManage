@@ -1,4 +1,4 @@
-<%--
+<%@ page import="cn.bookmanage.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: ASUS
   Date: 2021/6/16
@@ -41,6 +41,13 @@
 <head>
     <title>教材出库</title>
 </head>
+<%
+    User user=(User)request.getSession().getAttribute("user");
+    if(user==null)
+        response.sendRedirect("../PurchasingSystem/denied.jsp");
+    else if(user.getLevel()==1)
+        response.sendRedirect("../PurchasingSystem/denied.jsp");
+%>
 <body>
 <div class=book>
     <h1>图书出库</h1>
