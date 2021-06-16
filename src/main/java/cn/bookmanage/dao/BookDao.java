@@ -13,7 +13,6 @@ import java.sql.Date;
 public class BookDao {
     public static void BookIn(Book book){
         try{
-            System.out.println(book.getName());
             Connection conn= JNDIUtils.getConnection();
             ResultSet rs=null;
             if( conn != null){
@@ -61,12 +60,12 @@ public class BookDao {
                 }
 
                 //取出入库表里入库ID最大值
-                String getInID="select max(in_id) from bm_in";
+                String getInID="select MAX(in_id) from bm_in";
                 int InID=0;
                 ps=conn.prepareStatement(getInID);
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    InID=rs.getInt("in_id");
+                    InID=rs.getInt(1);
                 }
 
                 //获取时间，写入表中
@@ -117,7 +116,7 @@ public class BookDao {
             ps=conn.prepareStatement(getOutID);
             rs=ps.executeQuery();
             while(rs.next()){
-                OutID=rs.getInt("out_id");
+                OutID=rs.getInt(1);
             }
 
             //获取时间，写入表中

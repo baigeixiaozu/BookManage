@@ -41,7 +41,7 @@
                     alert("入库成功！");
                 },
                 error:function (){
-                    alert("入库chenggong!");
+                    alert("入库成功!");
                 }
             })
         })

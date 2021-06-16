@@ -25,12 +25,13 @@ public class BookServlet extends HttpServlet{
     public void doPost(HttpServletRequest servletRequest,HttpServletResponse servletResponse)throws IOException{
         servletResponse.setContentType("text/html;charset=utf-8");
         servletRequest.setCharacterEncoding("utf-8");
+
         ServletInputStream inputStream=servletRequest.getInputStream();
 
         String json=null;
         byte[] chunk=new byte[1024];
         while(inputStream.read(chunk)>0){ }
-        json=new String(chunk);
+        json=new String(chunk, "utf-8");
 
         ObjectMapper mapper=new ObjectMapper();
         Book book=mapper.readValue(json,Book.class);

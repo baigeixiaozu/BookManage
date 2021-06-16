@@ -32,7 +32,7 @@
                     alert("出库成功！");
                 },
                 error:function (){
-                    alert("出库chenggong!");
+                    alert("出库成功!");
                 }
             })
         })
