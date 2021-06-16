@@ -17,11 +17,11 @@ public class BookDao {
             Connection conn= JNDIUtils.getConnection();
             ResultSet rs=null;
             if( conn != null){
-                String search="select book_isbn from bm_book where book_name=?";
+                String search="select book_isbn from bm_book where book_isbn=?";
                 String result=null;
                 PreparedStatement ps=null;
                 ps=conn.prepareStatement(search);
-                ps.setString(1,book.getName());
+                ps.setString(1,book.getIsbn());
                 rs=ps.executeQuery();
                 while(rs.next()){
                     result=rs.getString("book_isbn");
@@ -51,24 +51,35 @@ public class BookDao {
 
                 //写入 入库表
                 //获取书籍ID
-                String getID="select book_id from bm_book where book_isbn=?";
+                String getBookID="select book_id from bm_book where book_isbn=?";
                 int ID=0;
-                ps=conn.prepareStatement(getID);
+                ps=conn.prepareStatement(getBookID);
                 ps.setString(1,book.getIsbn());
                 rs=ps.executeQuery();
                 while(rs.next()){
                     ID=rs.getInt("book_id");
                 }
 
+                //取出入库表里入库ID最大值
+                String getInID="select max(in_id) from bm_in";
+                int InID=0;
+                ps=conn.prepareStatement(getInID);
+                rs=ps.executeQuery();
+                while(rs.next()){
+                    InID=rs.getInt("in_id");
+                }
+
                 //获取时间，写入表中
-                String log="insert into bm_in values(?,?,?)";
+                String log="insert into bm_in values(?,?,?,?)";
                 java.util.Date date=new java.util.Date();
                 long t=date.getTime();
                 java.sql.Date time=new java.sql.Date(t);
                 ps=conn.prepareStatement(log);
-                ps.setInt(1,ID);
-                ps.setDouble(2,book.getCount());
-                ps.setDate(3,time);
+                ps.setInt(1,InID+1);
+                ps.setInt(2,ID);
+                ps.setDouble(3,book.getCount());
+                ps.setDate(4,time);
+                ps.execute();
 
                 conn.close();
             }
@@ -83,6 +94,7 @@ public class BookDao {
         try{
             //更新书库
             Connection conn=JNDIUtils.getConnection();
+            ResultSet rs=null;
             String update="update bm_book set book_count=book_count-? where book_isbn=?";
             PreparedStatement ps=conn.prepareStatement(update);
             ps.setDouble(1,book.getCount());
@@ -90,7 +102,35 @@ public class BookDao {
             ps.execute();
 
             //更新出库表
+            String getBookID="select book_id from bm_book where book_isbn=?";
+            int ID=0;
+            ps=conn.prepareStatement(getBookID);
+            ps.setString(1,book.getIsbn());
+            rs=ps.executeQuery();
+            while(rs.next()){
+                ID=rs.getInt("book_id");
+            }
 
+            //取出出库表里入库ID最大值
+            String getOutID="select max(out_id) from bm_out";
+            int OutID=0;
+            ps=conn.prepareStatement(getOutID);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                OutID=rs.getInt("out_id");
+            }
+
+            //获取时间，写入表中
+            String log="insert into bm_out values(?,?,?,?)";
+            java.util.Date date=new java.util.Date();
+            long t=date.getTime();
+            java.sql.Date time=new java.sql.Date(t);
+            ps=conn.prepareStatement(log);
+            ps.setInt(1,OutID+1);
+            ps.setInt(2,ID);
+            ps.setDouble(3,book.getCount());
+            ps.setDate(4,time);
+            ps.execute();
 
             conn.close();
         }
