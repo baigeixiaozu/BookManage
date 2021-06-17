@@ -11,8 +11,8 @@ const tableBody = function (){
         queryType = type;
         query(1);
         orderEvent();
-        DateEvent();
         pageNav();
+        if(type!=="queryAll")DateEvent();
     }
     let query = (page)=>{
         httpGet(API + queryType, {
