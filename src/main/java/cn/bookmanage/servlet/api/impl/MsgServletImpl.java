@@ -4,6 +4,7 @@ import cn.bookmanage.dao.MessageDao;
 import cn.bookmanage.entity.Message;
 import cn.bookmanage.entity.User;
 import cn.bookmanage.exception.BaseException;
+import cn.bookmanage.service.impl.MsgServiceImpl;
 import cn.bookmanage.servlet.api.IMsgServlet;
 import cn.bookmanage.utils.JsonUtil;
 
@@ -28,7 +29,7 @@ public class MsgServletImpl extends APIBaseServletImpl implements IMsgServlet{
         if(receiverStr==null)throw new BaseException(500, "数据异常");
         int receiverLevel = Integer.parseInt(receiverStr);
         int senderId = user.getId();
-        int cnt = MessageDao.sendMsg(senderId, receiverLevel, msg);
+        int cnt = new MsgServiceImpl().sendMsg(senderId, receiverLevel, msg);
         response.getWriter().print(JsonUtil.obj2String(new HashMap<String, Object>(){{
             put("code", cnt!=0?2000:0);
         }}));

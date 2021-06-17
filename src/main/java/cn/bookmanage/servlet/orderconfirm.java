@@ -30,7 +30,8 @@ public class orderconfirm extends HttpServlet {
         ps.purchase(4,web);
         ps.purchase(5,english);
         ps.purchase(6,po);
-        response.sendRedirect("PurchasingSystem/confirm.jsp");
+        // response.sendRedirect("PurchasingSystem/confirm.jsp");
+        System.out.println("What happened ???");
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);

@@ -60,7 +60,7 @@
                     </ul>
                 </li>
                 <li class="menu-list">
-                    <a href="PurchasingSystem/purchase.jsp">购买操作</a>
+                    <a id="PurchasingSystem" href="PurchasingSystem/purchase.jsp">采购操作</a>
                 </li>
             </ul>
         </nav>
@@ -84,6 +84,8 @@
                 document.getElementById("store").classList.add("active")
             else if(path.includes("MarketingSystem"))
                 document.getElementById("MarketingSystem").classList.add("active")
+            else if(path.includes("PurchasingSystem"))
+                document.getElementById("PurchasingSystem").classList.add("active")
             else if(path.includes("MessageSystem"))
                 document.getElementById("MessageSystem").classList.add("active")
             else if(path.includes("BookManage/Book_"))

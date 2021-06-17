@@ -31,7 +31,9 @@ public class purchaseServlet extends HttpServlet {
         sample.setSender(sender);
         samp.add(sample);
         ps.store(samp);
-        response.sendRedirect("PurchasingSystem/confirm.jsp");
+        // response.sendRedirect("PurchasingSystem/confirm.jsp");
+
+        System.out.println("What happened ???");
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);

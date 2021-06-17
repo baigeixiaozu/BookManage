@@ -7,6 +7,7 @@
 <%@ page import="cn.bookmanage.dao.MessageDao" %>
 <%@ page import="cn.bookmanage.entity.Message" %>
 <%@ page import="java.util.List" %>
+<%@ page import="cn.bookmanage.service.impl.MsgServiceImpl" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
@@ -31,7 +32,7 @@
 <% request.setCharacterEncoding("UTF-8");%>
 <%
     User user=(User)request.getSession().getAttribute("user");
-    List<Message> messages = MessageDao.get(user.getLevel());
+    List<Message> messages = new MsgServiceImpl().get(user.getLevel());
 %>
 <link rel="stylesheet" href="assets/css/github-markdown.css">
 <article class="markdown-body">
