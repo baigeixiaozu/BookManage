@@ -1,4 +1,7 @@
-<%@ page import="cn.bookmanage.entity.User" %><%--
+<%@ page import="cn.bookmanage.entity.User" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false"%>
+<%--
   Created by IntelliJ IDEA.
   User: Surface
   Date: 2021/6/1
@@ -6,55 +9,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:choose>
+  <c:when test="${sessionScope.user==null}">
+    <%
+      response.sendRedirect("../login.jsp");
+    %>
+  </c:when>
+</c:choose>
 <jsp:include page="../template/header.jsp">
   <jsp:param name="title" value="采购系统"/>
 </jsp:include>
-<html>
-<head>
-    <title>Title</title>
-  <style>
-    body {font-family: Arial, Helvetica, sans-serif;}
-    * {box-sizing: border-box;}
 
-    input[type=text], select, textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      margin-top: 6px;
-      margin-bottom: 16px;
-      resize: vertical;
-    }
-
-    input[type=submit] {
-      background-color: #04AA6D;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    input[type=submit]:hover {
-      background-color: #45a049;
-    }
-
-    .container {
-      border-radius: 5px;
-      background-color: #f2f2f2;
-      padding: 20px;
-    }
-  </style>
-</head>
-<body>
-<%
-  User user=(User)request.getSession().getAttribute("user");
-  if(user==null)
-    response.sendRedirect("denied.jsp");
-  else if(user.getLevel()==1)
-    response.sendRedirect("denied.jsp");
-%>
+<c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=4}">
+  <jsp:forward page="../error/403.jsp" />
+</c:if>
 <div class="container">
   <form action="http://localhost:8080/BookManage_war_exploded/orderconfirm" method="post">
     <label for="jsp">JSP实用教程（第4版）</label>
@@ -74,5 +42,3 @@
     <input type="submit" value="Submit">
   </form>
 </div>
-</body>
-</html>

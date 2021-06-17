@@ -5,6 +5,8 @@
   Time: 11:31
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="管理系统"/>
@@ -49,13 +51,9 @@
 </head>
 <body>
 
-<%
-    User user=(User)request.getSession().getAttribute("user");
-    if(user==null)
-        response.sendRedirect("denied.jsp");
-    else if(user.getLevel()==1)
-        response.sendRedirect("denied.jsp");
-%>
+<c:if test="${sessionScope.user.level==1}">
+    <jsp:forward page="../error/403.jsp" />
+</c:if>
 <div class="container">
     <form action="purchaseServlet" method="post">
         <label for="content">内容</label>

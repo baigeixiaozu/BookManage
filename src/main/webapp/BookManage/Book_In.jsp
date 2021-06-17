@@ -8,6 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
+
+<c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=6}">
+    <jsp:forward page="../error/403.jsp" />
+</c:if>
 <html>
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="管理系统"/>
@@ -47,13 +52,6 @@
         })
     })
 </script>
-<%
-    User user=(User)request.getSession().getAttribute("user");
-    if(user==null)
-        response.sendRedirect("../PurchasingSystem/denied.jsp");
-    else if(user.getLevel()==1)
-        response.sendRedirect("../PurchasingSystem/denied.jsp");
-%>
 <head>
     <title>教材入库</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery-3.6.0.min.js"></script>

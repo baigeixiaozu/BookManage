@@ -6,6 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false"%>
+
+<c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=6}">
+    <jsp:forward page="../error/403.jsp" />
+</c:if>
+
 <html>
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="管理系统"/>
@@ -41,13 +48,7 @@
 <head>
     <title>教材出库</title>
 </head>
-<%
-    User user=(User)request.getSession().getAttribute("user");
-    if(user==null)
-        response.sendRedirect("../PurchasingSystem/denied.jsp");
-    else if(user.getLevel()==1)
-        response.sendRedirect("../PurchasingSystem/denied.jsp");
-%>
+
 <body>
 <div class=book>
     <h1>图书出库</h1>
