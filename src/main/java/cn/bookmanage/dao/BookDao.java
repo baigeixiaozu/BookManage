@@ -91,11 +91,13 @@ public class BookDao {
 
     public static void BookOut(Book book){
         try{
-            //更新书库
             Connection conn=JNDIUtils.getConnection();
+            PreparedStatement ps=null;
             ResultSet rs=null;
+
+            //更新书库
             String update="update bm_book set book_count=book_count-? where book_isbn=?";
-            PreparedStatement ps=conn.prepareStatement(update);
+            ps=conn.prepareStatement(update);
             ps.setDouble(1,book.getCount());
             ps.setString(2,book.getIsbn());
             ps.execute();
@@ -128,7 +130,7 @@ public class BookDao {
             ps.setInt(1,OutID+1);
             ps.setInt(2,ID);
             ps.setDouble(3,book.getCount());
-/*            ps.setDate(4,time);*/
+            /*            ps.setDate(4,time);*/
             ps.execute();
 
             conn.close();

@@ -1,5 +1,17 @@
 <%@ page import="cn.bookmanage.entity.User" %>
-<%@ page import="java.net.URLEncoder" %><%--
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.LinkedList" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="cn.bookmanage.utils.JNDIUtils" %>
+<%@ page import="javax.naming.NamingException" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="cn.bookmanage.entity.BookBuy" %>
+<%@ page import="java.util.List" %>
+<%@ page import="cn.bookmanage.service.BookSystem.BookBuyService" %><%--
   Created by IntelliJ IDEA.
   User: ASUS
   Date: 2021/6/16
@@ -40,11 +52,10 @@
 
     $(document).ready(function (){
         $("#Out").click(function(){
-            var name=$("#name").val();
             var isbn=$("#ISBN").val();
             var count=$("#number").val();
 
-            book={"name":name,"author":"","isbn":isbn,"count":count};
+            book={"name":"","author":"","isbn":isbn,"count":count};
 
             $.ajax({
                 type:"post",
@@ -62,23 +73,65 @@
         })
     })
 </script>
+
 <head>
     <title>教材出库</title>
 </head>
 
 <body>
+<h1>图书出库</h1>
+<%
+    List<BookBuy> book=new BookBuyService().getCount();
+%>
+<script>
+    var bookNeeded={};
+    function BookOut(){
+        <c:forEach items="<%=book%>" var="b">
+        bookNeeded={"id":${b.bookId},"name":"","author":"","publish":"","isbn":${b.isbn},"price":"","count":${b.count}}
+        $.ajax({
+            type:"post",
+            url:"BookServlet",
+            data:JSON.stringify(bookNeeded),
+            dataType:"json",
+            contentType:"utf-8",
+        })
+        </c:forEach>
+        alert("出库成功");
+    }
+</script>
+<div id=table>
+    <h4>当前订单</h4>
+    <link rel="stylesheet" href="../assets/css/github-markdown.css">
+    <article class="markdown-body">
+        <table>
+            <thead>
+            <tr id="tableHead">
+                <td>图书编号</td>
+                <td>所需出库数量</td>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="<%=book%>" var="b">
+                <tr>
+                    <td>${b.bookId}</td>
+                    <td>${b.count}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </article>
+</div>
+<button onclick="BookOut()">一键出库</button>
 <div class=book>
-    <h1>图书出库</h1>
+   <h1>详细信息出库</h1>
     <div class=text>
         <table>
             <tr id="title">
-                <th>书名</th>
                 <th>ISBN</th>
                 <th>数量</th>
 
             </tr>
             <tr>
-                <td><input type=text id=name></td>
                 <td><input type=text id=ISBN></td>
                 <td><input type=text id=number></td>
             </tr>
@@ -86,6 +139,7 @@
     </div>
     <div class=count></div>
 </div>
+
 <div class=button>
     <button id=Out>出库</button>
     <input type=reset value="重置">
