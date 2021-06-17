@@ -24,13 +24,13 @@
                     <span id="store">库存</span>
                     <ul class="menu-list-sub">
                         <li>
-                            <a href="store/queryAll.jsp" >全部</a>
+                            <a href="store/queryAll.jsp" >全部库存</a>
                         </li>
                         <li>
-                            <a href="store/queryIn.jsp" >入库</a>
+                            <a href="store/queryIn.jsp" >入库记录</a>
                         </li>
                         <li>
-                            <a href="store/queryOut.jsp" >出库</a>
+                            <a href="store/queryOut.jsp" >出库记录</a>
                         </li>
                     </ul>
                 </li>

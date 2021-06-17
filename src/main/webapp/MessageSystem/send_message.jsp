@@ -65,7 +65,7 @@
             <option value="8">图书管理员</option>
             <option value="6">发行人员</option>
             <option value="4">采购人员</option>
-            <option value="0">所有用户</option>
+            <option value="1">所有用户</option>
         </select>
         <input type="submit" onclick="sendMsg()" value="提交">
     </form>

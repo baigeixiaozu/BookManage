@@ -17,8 +17,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=4}">
-    <jsp:forward page="../error/403.jsp" />
+<c:if test="${sessionScope.user==null}">
+    <jsp:forward page="../error/401.jsp" />
 </c:if>
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="我的消息"/>
