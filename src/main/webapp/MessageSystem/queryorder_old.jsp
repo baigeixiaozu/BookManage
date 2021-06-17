@@ -17,24 +17,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="../template/header.jsp">
-    <jsp:param name="title" value="采购系统"/>
-</jsp:include>
-
-<html>
-<head>
-    <title>This is Marketing System</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery-3.6.0.min.js" charset="UTF-8"></script>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/purchase.css">
-    <script src="${pageContext.request.contextPath}/assets/js/MarketingSystem.js" charset="UTF-8"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/MarketingSystemAjax.js" charset="UTF-8"></script>
-</head>
-<body>
-<% response.setCharacterEncoding("UTF-8");%>
-<% request.setCharacterEncoding("UTF-8");%>
 <c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=4}">
     <jsp:forward page="../error/403.jsp" />
 </c:if>
+<jsp:include page="../template/header.jsp">
+    <jsp:param name="title" value="我的消息"/>
+</jsp:include>
+
+<%--<html>--%>
+<%--<head>--%>
+<%--    <title>This is Marketing System</title>--%>
+<%--    <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery-3.6.0.min.js" charset="UTF-8"></script>--%>
+<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/purchase.css">--%>
+<%--    <script src="${pageContext.request.contextPath}/assets/js/MarketingSystem.js" charset="UTF-8"></script>--%>
+<%--    <script src="${pageContext.request.contextPath}/assets/js/MarketingSystemAjax.js" charset="UTF-8"></script>--%>
+<%--</head>--%>
+<%--<body>--%>
+<% response.setCharacterEncoding("UTF-8");%>
+<% request.setCharacterEncoding("UTF-8");%>
 <%
     User user=(User)request.getSession().getAttribute("user");
     PurchasingServices ps=new PurchasingServices();

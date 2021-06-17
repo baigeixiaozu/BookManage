@@ -23,11 +23,12 @@ public class MsgServletImpl extends APIBaseServletImpl implements IMsgServlet{
         if (user == null)throw new BaseException(403, "未登录");
 
         String receiverStr = request.getParameter("receiver");
+        String msg = request.getParameter("msg");
+
         if(receiverStr==null)throw new BaseException(500, "数据异常");
         int receiverLevel = Integer.parseInt(receiverStr);
-        int senderLevel = user.getLevel();
-        String msg = request.getParameter("msg");
-        int cnt = MessageDao.sendMsg(senderLevel, receiverLevel, msg);
+        int senderId = user.getId();
+        int cnt = MessageDao.sendMsg(senderId, receiverLevel, msg);
         response.getWriter().print(JsonUtil.obj2String(new HashMap<String, Object>(){{
             put("code", cnt!=0?2000:0);
         }}));

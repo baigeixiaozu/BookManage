@@ -55,25 +55,60 @@
     <jsp:forward page="../error/403.jsp" />
 </c:if>
 <div class="container">
-    <form action="purchaseServlet" method="post">
+    <form id="message" onsubmit="return false">
         <label for="content">内容</label>
         <input type="text" id="content" name="content" placeholder="content">
 
         <label for="receiver">接收方</label>
         <select id="receiver" name="receiver">
-            <option name="超级管理员" value="超级管理员">超级管理员</option>
-            <option name="采购员" value="采购员">采购员</option>
-            <option name="订书员" value="订书员">订书员</option>
+            <option value="10">超级管理员</option>
+            <option value="8">图书管理员</option>
+            <option value="6">发行人员</option>
+            <option value="4">采购人员</option>
+            <option value="0">所有用户</option>
         </select>
-        <label for="sender">发送方</label>
-        <select id="sender" name="sender">
-            <option name="超级管理员" value="超级管理员">超级管理员</option>
-            <option name="采购员" value="采购员">采购员</option>
-            <option name="订书员" value="订书员">订书员</option>
-        </select>
-        <input type="submit" value="Submit">
+        <input type="submit" onclick="sendMsg()" value="提交">
     </form>
 </div>
-</body>
-</html>
+
+<script>
+    function sendMsg() {
+        httpPost("Api/Msg/send", {
+            receiver: message.receiver.value,
+            msg: message.content.value
+        }).then(res => {
+            console.log(res)
+            if(res.code===2000)
+                Swal.fire({
+                    title: '发送成功！',
+                    icon: 'success',
+                    // html: '准备跳转至',
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    focusConfirm: false
+                })
+            else
+                Swal.fire({
+                    title: '发送失败！',
+                    icon: 'error',
+                    html: '<span style="color: red">' + res.msg + '</span>',
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    focusConfirm: false,
+                    timer: 5000
+                })
+        }).catch(err=>{
+            console.error(err);
+            Swal.fire({
+                title: '发送失败！',
+                icon: 'error',
+                html: '<span style="color: red">' + err.msg + '</span>',
+                showCloseButton: false,
+                showCancelButton: false,
+                focusConfirm: false,
+                timer: 5000
+            })
+        })
+    }
+</script>
 <jsp:include page="../template/footer.jsp" />

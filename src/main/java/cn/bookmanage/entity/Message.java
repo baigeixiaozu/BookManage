@@ -12,7 +12,8 @@ public class Message {
     private int id;
     private String content;
     private String time;
-    private int sender;
+    private int senderId;
+    private String senderName;
     private int receiver;
     private int reader_state;
 }

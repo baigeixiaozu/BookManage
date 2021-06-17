@@ -38,13 +38,13 @@
                     <a id="MarketingSystem" href="MarketingSystem/queryMarketingSystem.jsp">销售系统</a>
                 </li>
                 <li class="menu-list">
-                    <span id="message">消息</span>
+                    <span id="MessageSystem">消息</span>
                     <ul class="menu-list-sub">
                         <li>
-                            <a href="PurchasingSystem/queryorder.jsp" >查看消息</a>
+                            <a href="MessageSystem/queryorder.jsp" >查看消息</a>
                         </li>
                         <li>
-                            <a href="PurchasingSystem/send_message.jsp" >发消息</a>
+                            <a href="MessageSystem/send_message.jsp" >发消息</a>
                         </li>
                     </ul>
                 </li>
@@ -84,6 +84,8 @@
                 document.getElementById("store").classList.add("active")
             else if(path.includes("MarketingSystem"))
                 document.getElementById("MarketingSystem").classList.add("active")
+            else if(path.includes("MessageSystem"))
+                document.getElementById("MessageSystem").classList.add("active")
             else if(path.includes("BookManage/Book_"))
                 document.getElementById("BookManage").classList.add("active")
             else if(path.includes("user/info.jsp"))
