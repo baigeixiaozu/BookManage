@@ -71,49 +71,10 @@
             })
         })
     })
-
-/*    function BookIn(Name,Isbn,Need) {
-
-        $.ajax({
-            type: "post",
-            url: "OldBookServlet",
-            data: {
-                name: Name,
-                isbn: Isbn,
-                count: Need
-            },
-            dataType: "text",
-            contentType: "utf-8",
-            success: function (data) {
-                alert("入库成功");
-            },
-            error: function () {
-                alert("入库失败");
-            }
-        })
-    }*/
 </script>
 <script>
     var OldBook={};
         function BookIn(Name,Isbn,Need){
-           /* $.ajax({
-                type: "post",
-                url: "OldBookServlet",
-                data: {
-                    name:Name,
-                    isbn:Isbn,
-                    count:Need
-                },
-                dataType:"text",
-                contentType: "utf-8",
-                success:function(data){
-                    alert("入库成功");
-                },
-                error:function (){
-                    alert("入库失败");
-                }
-            })*/
-
             OldBook={"name":Name,"author":"","publish":"","isbn":Isbn,"price":"","count":Need}
 
             $.ajax({
