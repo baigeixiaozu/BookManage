@@ -1,6 +1,8 @@
 package cn.bookmanage.dao;
 
 import cn.bookmanage.entity.Book;
+import cn.bookmanage.entity.Order;
+import cn.bookmanage.entity.User;
 import cn.bookmanage.utils.JNDIUtils;
 
 import javax.naming.NamingException;
@@ -174,6 +176,61 @@ public class MarketingDao {
         return new LinkedList<Object>() {{
             add(finalTotal);
             add(books);
+        }};
+    }
+
+    public static List<Object> queryOrder(int page, int count, User user) {
+        Connection conn = null;
+
+        List<Order> orders = new LinkedList<>();
+        int total = 0;
+        try {
+            conn = JNDIUtils.getConnection();
+            PreparedStatement ps = null;
+            ps = conn.prepareStatement("select COUNT(1) from bm_buy join bm_book on bm_buy.book_id = bm_book.book_id where user_id = ?");
+            ps.setInt(1,user.getId());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                total=rs.getInt(1);
+            }
+            rs.close();
+
+            ps = null;
+            ps = conn.prepareStatement("select buy_id, bm_book.* from bm_buy join bm_book on bm_buy.book_id = bm_book.book_id where user_id = ? LIMIT ?,?");
+            ps.setInt(1,user.getId());
+            ps.setInt(2,(page - 1) * count);
+            ps.setInt(3, count);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ResultSet finalRs = rs;
+                orders.add(new Order(){{
+                    setOrder_id(finalRs.getLong("buy_id"));
+                    setId(finalRs.getLong("book_id"));
+                    setName(finalRs.getString("book_name"));
+                    setAuthor(finalRs.getString("book_author"));
+                    setPublish(finalRs.getString("book_pub"));
+                    setIsbn(finalRs.getString("book_isbn"));
+                    setPrice(finalRs.getDouble("book_price"));
+                }});
+            }
+            rs.close();
+
+        } catch (SQLException | NamingException throwables) {
+            throwables.printStackTrace();
+        } finally{
+            if(null != conn) {
+                try {
+                    conn.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        int finalTotal = total;
+        return new LinkedList<Object>() {{
+            add(finalTotal);
+            add(orders);
         }};
     }
 }

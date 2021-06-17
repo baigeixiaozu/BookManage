@@ -39,8 +39,23 @@
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="作者查询"/>
 </jsp:include>
+<script type="text/javascript"></script>
+<script>
+    function addCart(id) {
+            $.ajax({
+                type: "post",
+                url: "/BookManage/MarketingServlet",
+                data: {"id":id},
+                dataType: "text",
+                success: function (data) {
+                    alert("提交成功!"+"\r\n"+data);
 
-<script type="text/javascript">
+                },
+                error: function () {
+                    alert("提交失败,请重试或者检查您的环境");
+                }
+            })
+    }
     function sel() {
         document.thisform.submit();
     }
@@ -68,7 +83,7 @@
     <br>
     <table>
         <thead>
-        <tr>
+        <tr style="border: none">
             <td>序号</td>
             <td>书名</td>
             <td>作者</td>
@@ -80,7 +95,7 @@
         </thead>
         <tbody>
         <c:forEach items="<%=books%>" var="book" varStatus="s">
-            <tr>
+            <tr style="border: none">
                 <td>${s.index+1}</td>
                 <td>${book.name}</td>
                 <td>${book.author}</td>
@@ -88,6 +103,7 @@
                 <td>${book.isbn}</td>
                 <td>${book.price}</td>
                 <td>${book.count}</td>
+                <td style="background: #F3F7F9;border: none"><button onclick="addCart(${book.id})">购买</button></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -125,5 +141,6 @@
             padding: 10px;
         }
     </style>
+
 </article>
 <jsp:include page="../template/footer.jsp" />

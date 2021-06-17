@@ -56,8 +56,8 @@
 <h1>Welcome to MarketingSystem!</h1>
 
 <div class="box">
-    <div>查询</div>
-    <div>提交订书单</div>
+    <div>购买</div>
+    <div><a href="${pageContext.request.contextPath}/MarketingSystem/queryBookOrder.jsp">查看订书单</a> </div>
 </div>
 <div class="box1">
     <div class="item">
@@ -69,18 +69,7 @@
             </li>
         </ul>
     </div>
-    <div class="item">
-        <ul id="books">
-            <li >JSP实用教程（第4版）</li><button class="btn1" value="0">订购</button>
-            <li >计算机组成原理微课版</li><button class="btn1" value="0">订购</button>
-            <li >软件工程：实践者的研究方法（原书第8版）（本科教学版）</li><button class="btn1" value="0">订购</button>
-            <li >web前端设计基础——html5、css3、java(二版)</li><button class="btn1" value="0">订购</button>
-            <li >新目标大学英语系列教材：科技英语教程学生用书</li><button class="btn1" value="0">订购</button>
-            <li >概率论与数理统计及其应用（第2版）</li><button class="btn1" value="0">订购</button>
-       </ul>
-        <br>
-        <input type="button" value="提交" id="btn">
-    </div>
+
 </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package cn.bookmanage.dao;
 
 import cn.bookmanage.entity.Book;
+import cn.bookmanage.entity.User;
 import cn.bookmanage.utils.JNDIUtils;
 
 import javax.naming.NamingException;
@@ -53,4 +54,46 @@ public class UpdateDao {
         return 0;
     }
 
+    public static void insertByID(int id, User user) {
+        Connection connection = null;
+        try {
+            connection = JNDIUtils.getConnection();
+            if (connection != null) {
+                String sql = "insert into bm_buy(user_id,book_id) values(?,?)";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, user.getId());
+                ps.setInt(2, id);
+                ps.execute();
+
+            }
+
+            connection.close();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+    }
+
+    public static void deleteByID(int id, User user) {
+        Connection connection = null;
+        try {
+            connection = JNDIUtils.getConnection();
+            if (connection != null) {
+                String sql = "delete from bm_buy where buy_id = ?";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, id);
+                ps.execute();
+
+            }
+
+            connection.close();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }

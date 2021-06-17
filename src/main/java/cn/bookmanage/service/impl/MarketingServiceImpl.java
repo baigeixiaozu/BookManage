@@ -1,6 +1,7 @@
 package cn.bookmanage.service.impl;
 
 import cn.bookmanage.dao.MarketingDao;
+import cn.bookmanage.entity.User;
 import cn.bookmanage.dao.StoreDao;
 
 import java.util.List;
@@ -14,5 +15,8 @@ public class MarketingServiceImpl {
     }
     public List<Object> queryISBN(int page, int count, String ISBN){
         return MarketingDao.queryISBN(page, count, ISBN);
+    }
+    public List<Object> queryOrder(int page, int count, User user) {
+        return MarketingDao.queryOrder(page,  count,  user);
     }
 }
