@@ -1,4 +1,5 @@
-<%@ page import="cn.bookmanage.entity.User" %><%--
+<%@ page import="cn.bookmanage.entity.User" %>
+<%@ page import="java.net.URLEncoder" %><%--
   Created by IntelliJ IDEA.
   User: ASUS
   Date: 2021/5/13
@@ -10,13 +11,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
 
-<c:if test="${sessionScope.user==null}">
-    <jsp:forward page="../login.jsp" />
-</c:if>
+<%--权限检查START--%>
+<%
+    User user = (User) request.getSession().getAttribute("user");
+    String req = request.getRequestURI();
+    String query = request.getQueryString();
+    String redirect = req + (query==null?"":"?"+query);
+
+    // URL编码,处理含参地址
+    redirect = URLEncoder.encode(redirect, "UTF-8");
+
+    if(user == null){
+        response.sendRedirect("../error/401.jsp?redirect=" + redirect);
+        return;
+    }
+%>
 <c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=6}">
     <jsp:forward page="../error/403.jsp" />
 </c:if>
-<html>
+<%--权限检查END--%>
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="管理系统"/>
 </jsp:include>

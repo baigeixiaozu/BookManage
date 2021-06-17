@@ -1,6 +1,8 @@
 <%@ page import="cn.bookmanage.service.PurchaseSystem.PurchaseService" %>
 <%@ page import="cn.bookmanage.entity.Purchase" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="cn.bookmanage.entity.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false"%>
 <%--
@@ -11,16 +13,30 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:if test="${sessionScope.user==null}">
-  <jsp:forward page="../login.jsp" />
+
+<%--权限检查START--%>
+<%
+  User user = (User) request.getSession().getAttribute("user");
+  String req = request.getRequestURI();
+  String query = request.getQueryString();
+  String redirect = req + (query==null?"":"?"+query);
+
+  // URL编码,处理含参地址
+  redirect = URLEncoder.encode(redirect, "UTF-8");
+
+  if(user == null){
+    response.sendRedirect("../error/401.jsp?redirect=" + redirect);
+    return;
+  }
+%>
+<c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=4}">
+  <jsp:forward page="../error/403.jsp" />
 </c:if>
+<%--权限检查END--%>
 <jsp:include page="../template/header.jsp">
   <jsp:param name="title" value="采购系统"/>
 </jsp:include>
 
-<c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=4}">
-  <jsp:forward page="../error/403.jsp" />
-</c:if>
 
 <div class="container">
   <link rel="stylesheet" href="assets/css/github-markdown.css">

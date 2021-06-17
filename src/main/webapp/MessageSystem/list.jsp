@@ -4,6 +4,7 @@
 <%@ page import="cn.bookmanage.entity.Message" %>
 <%@ page import="java.util.List" %>
 <%@ page import="cn.bookmanage.service.impl.MsgServiceImpl" %>
+<%@ page import="java.net.URLEncoder" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
@@ -16,10 +17,24 @@
   Time: 19:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:if test="${sessionScope.user==null}">
-    <jsp:forward page="../error/401.jsp" />
-</c:if>
+
+<%--权限检查START--%>
+<%
+    User user = (User) request.getSession().getAttribute("user");
+    String req = request.getRequestURI();
+    String query = request.getQueryString();
+    String redirect = req + (query==null?"":"?"+query);
+
+    // URL编码,处理含参地址
+    redirect = URLEncoder.encode(redirect, "UTF-8");
+
+    if(user == null){
+        response.sendRedirect("../error/401.jsp?redirect=" + redirect);
+        return;
+    }
+%>
+<%--权限检查END--%>
+
 <jsp:include page="../template/header.jsp">
     <jsp:param name="title" value="我的消息"/>
 </jsp:include>
@@ -27,7 +42,6 @@
 <% response.setCharacterEncoding("UTF-8");%>
 <% request.setCharacterEncoding("UTF-8");%>
 <%
-    User user=(User)request.getSession().getAttribute("user");
     List<Message> messages = new MsgServiceImpl().get(user.getLevel());
 %>
 <link rel="stylesheet" href="assets/css/github-markdown.css">
