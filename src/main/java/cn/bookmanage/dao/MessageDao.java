@@ -61,12 +61,12 @@ public class MessageDao {
         System.out.print(level);
         try {
             if(level==10){
-               sql = "select * from bm_info where read_state=0 ";}
+               sql = "select * from bm_msg where read_state=0 ";}
             else if(level==6){
-                sql = "select * from bm_info where read_state=0 and receiver='采购员'";
+                sql = "select * from bm_msg where read_state=0 and receiver='采购员'";
             }
             else{
-               sql = "select * from bm_info where read_state=0 and receiver='订书员'";
+               sql = "select * from bm_msg where read_state=0 and receiver='订书员'";
             }
             connection = JNDIUtils.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -101,7 +101,7 @@ public class MessageDao {
     }
     public static void store(ArrayList<info> sample)  {//将需要购买的消息存入数据库
         Connection connection = null;
-       String sql = "insert into bm_info(info_id,content,time,receiver,sender,read_state) values(?,?,?,?,?,?)";
+       String sql = "insert into bm_msg(info_id,content,time,receiver,sender,read_state) values(?,?,?,?,?,?)";
         try {
             int i=0;
             for(i=0;i<sample.size();i++){
@@ -173,7 +173,7 @@ public class MessageDao {
     public static Long search_id() {
         Connection connection = null;
         Long temp=0L;
-        String sql = "select * from bm_info group by info_id order by info_id  DESC limit 1" ;
+        String sql = "select * from bm_msg group by info_id order by info_id  DESC limit 1" ;
         ResultSet rs=null;
         try {
             connection = JNDIUtils.getConnection();
