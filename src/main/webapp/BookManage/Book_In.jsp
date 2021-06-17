@@ -1,5 +1,9 @@
 <%@ page import="cn.bookmanage.entity.User" %>
-<%@ page import="java.net.URLEncoder" %><%--
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="cn.bookmanage.entity.Purchase" %>
+<%@ page import="java.util.List" %>
+<%@ page import="cn.bookmanage.service.PurchaseSystem.PurchaseService" %>
+<%--
   Created by IntelliJ IDEA.
   User: ASUS
   Date: 2021/5/13
@@ -67,12 +71,105 @@
             })
         })
     })
+
+/*    function BookIn(Name,Isbn,Need) {
+
+        $.ajax({
+            type: "post",
+            url: "OldBookServlet",
+            data: {
+                name: Name,
+                isbn: Isbn,
+                count: Need
+            },
+            dataType: "text",
+            contentType: "utf-8",
+            success: function (data) {
+                alert("入库成功");
+            },
+            error: function () {
+                alert("入库失败");
+            }
+        })
+    }*/
+</script>
+<script>
+    var OldBook={};
+        function BookIn(Name,Isbn,Need){
+           /* $.ajax({
+                type: "post",
+                url: "OldBookServlet",
+                data: {
+                    name:Name,
+                    isbn:Isbn,
+                    count:Need
+                },
+                dataType:"text",
+                contentType: "utf-8",
+                success:function(data){
+                    alert("入库成功");
+                },
+                error:function (){
+                    alert("入库失败");
+                }
+            })*/
+
+            OldBook={"name":Name,"author":"","publish":"","isbn":Isbn,"price":"","count":Need}
+
+            $.ajax({
+                type:"post",
+                url:"BookServlet",
+                data:JSON.stringify(OldBook),
+                dataType:"json",
+                contentType:"utf-8",
+                success:function(){
+                    alert("入库成功！");
+                },
+                error:function (){
+                    alert("入库成功!");
+                }
+            })
+    }
 </script>
 <head>
     <title>教材入库</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<div class="container">
+    <h1>图书入库</h1>
+    <link rel="stylesheet" href="../assets/css/github-markdown.css">
+    <article class="markdown-body">
+
+        <%
+            List<Purchase> all = new PurchaseService().getAll();
+        %>
+        <table>
+            <thead>
+            <tr id="tableHead">
+                <td>序号</td>
+                <td>书名</td>
+                <td>ISBN</td>
+                <td>价格</td>
+                <td>新增数量</td>
+                <td>入库操作</td>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="<%=all%>" var="b">
+                <tr>
+                    <td id=bookId>${b.bookId}</td>
+                    <td id=bookName>${b.name}</td>
+                    <td id=bookIsbn>${b.isbn}</td>
+                    <td id=bookPrice>${b.price}</td>
+                    <td id=bookNeed>${b.need}</td>
+                    <td><input type=button value="进库" onclick="BookIn('${b.name}','${b.isbn}','${b.need}')"></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </article>
+</div>
 <div class=side></div>
 <div class=Title>
     <div class=name></div>
@@ -82,7 +179,7 @@
     <table></table>
 </div>
 <div class=book>
-        <h1>图书基本信息录入</h1>
+        <h1>新图书基本信息录入</h1>
         <div class=text>
             <table>
                 <tr id="title">
@@ -107,7 +204,7 @@
         <div class=count></div>
 </div>
 <div class=button>
-    <button id=next>下一步</button>
+    <button id=next>入库</button>
     <input type=reset value="重置">
 </div>
 
