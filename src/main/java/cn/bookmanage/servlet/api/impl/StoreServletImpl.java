@@ -147,6 +147,10 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
     }
 
     public void updateBookInfoAction() throws IOException {
+
+        if (!checkUser()) {
+            throw new BaseException(403, "权限不足");
+        }
         String bookId = request.getParameter("id");
         String name = request.getParameter("name");
         String author = request.getParameter("author");
@@ -167,6 +171,7 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
             put("code", b?2000:0);
         }}));
     }
+
     private boolean checkUser(){
         User user = (User) request.getSession().getAttribute("user");
 
