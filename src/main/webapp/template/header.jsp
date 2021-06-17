@@ -60,7 +60,7 @@
                     </ul>
                 </li>
                 <li class="menu-list">
-                    <a id="PurchasingSystem" href="PurchasingSystem/purchase.jsp">采购操作</a>
+                    <a id="PurchasingSystem" href="PurchasingSystem/list.jsp">采购列表</a>
                 </li>
             </ul>
         </nav>

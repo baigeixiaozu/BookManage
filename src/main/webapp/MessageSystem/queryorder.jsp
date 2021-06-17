@@ -1,10 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false"%>
 <%@ page import="cn.bookmanage.entity.User" %>
-<%@ page import="cn.bookmanage.service.purchasing.PurchasingServices" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="cn.bookmanage.entity.info" %>
-<%@ page import="cn.bookmanage.dao.MessageDao" %>
 <%@ page import="cn.bookmanage.entity.Message" %>
 <%@ page import="java.util.List" %>
 <%@ page import="cn.bookmanage.service.impl.MsgServiceImpl" %>
