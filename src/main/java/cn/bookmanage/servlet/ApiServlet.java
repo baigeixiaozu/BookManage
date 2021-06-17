@@ -87,7 +87,7 @@ public class ApiServlet extends HttpServlet {
             ja.put("errCode", 10404);
             ja.put("errMsg", e.getLocalizedMessage() + "方法未找到");
         }catch (InvocationTargetException e){
-
+            e.printStackTrace();
             // 方式二
             Throwable cause = e.getCause();
             if (cause instanceof BaseException) {

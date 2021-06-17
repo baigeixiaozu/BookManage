@@ -194,10 +194,10 @@ public class MessageDao {
 
     /**
      * 发送一条消息
-     * @param sender
-     * @param receiver
-     * @param msg
-     * @return
+     * @param sender    发送者id
+     * @param receiver  接收者id
+     * @param msg       消息内容
+     * @return          自增id - [int]
      */
     public static int sendMsg(int sender, int receiver, String msg){
         String sql = "INSERT INTO bm_msg(`sender`, `receiver`, `content`) VALUES(?, ?, ?)";
