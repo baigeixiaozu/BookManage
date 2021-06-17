@@ -1,6 +1,7 @@
 package cn.bookmanage.service.impl;
 
 import cn.bookmanage.dao.StoreDao;
+import cn.bookmanage.entity.Book;
 import cn.bookmanage.service.StoreService;
 
 import java.util.List;
@@ -28,4 +29,7 @@ public class StoreServiceImpl implements StoreService {
         return StoreDao.queryInOut(page, count, 1, new int[]{Integer.parseInt(orderArr[0]), Integer.parseInt(orderArr[1])}, time);
     }
 
+    public Book queryBook(int bookId){
+        return StoreDao.queryBook(bookId);
+    }
 }

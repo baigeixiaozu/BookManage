@@ -36,7 +36,7 @@ const tableBody = function (){
         if("All" === queryType){
             return `<tr>
                         <td>${ele.id}</td>
-                        <td>${ele.name}</td>
+                        <td><a href="store/edit.jsp?bookId=${ele.id}" target="_blank">${ele.name}</a></td>
                         <td>${ele.author}</td>
                         <td>${ele.publish}</td>
                         <td>${ele.isbn}</td>

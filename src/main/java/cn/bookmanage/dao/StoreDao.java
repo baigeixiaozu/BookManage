@@ -184,4 +184,27 @@ public class StoreDao {
         }
         return book;
     }
+
+    public static boolean updateBook(Book book){
+        Connection connection;
+        try{
+            connection = JNDIUtils.getConnection();
+            String sql = "UPDATE bm_book SET book_name=?, book_author=?,book_pub=?,book_isbn=?,book_price=? WHERE book_id=?";
+            Object[] p = {
+                    book.getName(),
+                    book.getAuthor(),
+                    book.getPublish(),
+                    book.getIsbn(),
+                    book.getPrice(),
+                    book.getId()
+            };
+            int cnt = JNDIUtils.executeUpdate(connection, sql, p);
+            return cnt==1;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

@@ -145,6 +145,28 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
             put("book", book);
         }}));
     }
+
+    public void updateBookInfoAction() throws IOException {
+        String bookId = request.getParameter("id");
+        String name = request.getParameter("name");
+        String author = request.getParameter("author");
+        String publish = request.getParameter("publish");
+        String isbn = request.getParameter("isbn");
+        String price = request.getParameter("price");
+        Book book = new Book(){{
+           setId(Long.parseLong(bookId));
+           setName(name);
+           setAuthor(author);
+           setPublish(publish);
+           setIsbn(isbn);
+           setPrice(Double.parseDouble(price));
+        }};
+        boolean b = StoreDao.updateBook(book);
+
+        response.getWriter().print(JsonUtil.obj2String(new HashMap<String, Object>(){{
+            put("code", b?2000:0);
+        }}));
+    }
     private boolean checkUser(){
         User user = (User) request.getSession().getAttribute("user");
 
