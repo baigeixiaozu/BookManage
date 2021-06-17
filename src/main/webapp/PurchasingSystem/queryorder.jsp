@@ -1,22 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false"%>
-<%@ page import="cn.bookmanage.service.impl.StoreServiceImpl" %>
-<%@ page import="cn.bookmanage.service.StoreService" %>
-<%@ page import="cn.bookmanage.entity.Book" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="cn.bookmanage.entity.User" %>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="cn.bookmanage.dao.MessageDao" %>
 <%@ page import="cn.bookmanage.service.purchasing.PurchasingServices" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="cn.bookmanage.entity.info" %>
 
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-
-
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--

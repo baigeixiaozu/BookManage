@@ -1,4 +1,3 @@
-<%@ page import="cn.bookmanage.entity.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false"%>
 <%--
@@ -19,6 +18,40 @@
 <c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=4}">
   <jsp:forward page="../error/403.jsp" />
 </c:if>
+<style>
+  body {font-family: Arial, Helvetica, sans-serif;}
+  * {box-sizing: border-box;}
+
+  input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+  }
+
+  input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+
+  .container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+</style>
 <div class="container">
   <form action="http://localhost:8080/BookManage_war_exploded/orderconfirm" method="post">
     <label for="jsp">JSP实用教程（第4版）</label>
