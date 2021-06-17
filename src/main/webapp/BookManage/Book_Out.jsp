@@ -9,6 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false"%>
 
+<c:if test="${sessionScope.user==null}">
+    <jsp:forward page="../login.jsp" />
+</c:if>
 <c:if test="${sessionScope.user.level!=10&&sessionScope.user.level!=6}">
     <jsp:forward page="../error/403.jsp" />
 </c:if>
