@@ -39,7 +39,7 @@
     User user=(User)request.getSession().getAttribute("user");
     PurchasingServices ps=new PurchasingServices();
     ArrayList<info> sample= ps.fetch();
-    ps.store(sample);
+    // ps.store(sample);
     int level=0;
     if(user!=null)
     level=user.getLevel();

@@ -35,7 +35,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="MarketingSystem/queryMarketingSystem.jsp">销售系统</a>
+                    <a id="MarketingSystem" href="MarketingSystem/queryMarketingSystem.jsp">销售系统</a>
                 </li>
                 <li class="menu-list">
                     <span id="message">消息</span>
@@ -82,6 +82,10 @@
                 document.getElementById("index").classList.add("active")
             else if(path.includes("store"))
                 document.getElementById("store").classList.add("active")
+            else if(path.includes("MarketingSystem"))
+                document.getElementById("MarketingSystem").classList.add("active")
+            else if(path.includes("BookManage/Book_"))
+                document.getElementById("BookManage").classList.add("active")
             else if(path.includes("user/info.jsp"))
                 document.getElementById("user-info-link").classList.add("active")
             else
