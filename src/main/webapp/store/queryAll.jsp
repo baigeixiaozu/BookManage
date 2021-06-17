@@ -48,7 +48,7 @@
             display: none;
         }
     </style>
-    <h2>这是查询全部库存的页面</h2>
+    <h2>查询全部库存</h2>
     <table>
         <thead>
         <tr id="tableHead">

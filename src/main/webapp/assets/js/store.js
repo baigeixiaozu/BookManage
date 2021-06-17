@@ -136,6 +136,7 @@ const tableBody = function (){
         return `${date.getFullYear()}-${month}-${day} ${hour}:${m}:${s}`;
     }
     return {
-        init: init
+        init: init,
+        query: query
     }
 }();

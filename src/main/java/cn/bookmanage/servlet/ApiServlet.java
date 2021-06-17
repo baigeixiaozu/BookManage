@@ -75,17 +75,17 @@ public class ApiServlet extends HttpServlet {
 
             statusOK = true;
         } catch (ClassNotFoundException e) {
-            // TODO: errCode
+            // TODO: code
             e.printStackTrace();
 
-            ja.put("errCode", 10404);
-            ja.put("errMsg", pkg + " - 未找到指定类");
+            ja.put("code", 10404);
+            ja.put("msg", pkg + " - 未找到指定类");
             response.getWriter().print(JsonUtil.obj2String(ja));
 
         } catch (NoSuchMethodException e){
 
-            ja.put("errCode", 10404);
-            ja.put("errMsg", e.getLocalizedMessage() + "方法未找到");
+            ja.put("code", 10404);
+            ja.put("msg", e.getLocalizedMessage() + "方法未找到");
         }catch (InvocationTargetException e){
             e.printStackTrace();
             // 方式二
@@ -93,8 +93,8 @@ public class ApiServlet extends HttpServlet {
             if (cause instanceof BaseException) {
                 BaseException cause1 = (BaseException) cause;
 
-                ja.put("errCode", cause1.getCode());
-                ja.put("errMsg", cause1.getMessage());
+                ja.put("code", cause1.getCode());
+                ja.put("msg", cause1.getMessage());
             }else{
                 throw new RuntimeException(cause.getMessage());
             }
@@ -102,8 +102,8 @@ public class ApiServlet extends HttpServlet {
         }catch (Exception e) {
             e.printStackTrace();
 
-            ja.put("errCode", 10500);
-            ja.put("errMsg", e.getMessage() + "未知异常");
+            ja.put("code", 10500);
+            ja.put("msg", e.getMessage() + "未知异常");
         }finally {
             if(!statusOK)response.getWriter().print(JsonUtil.obj2String(ja));
         }

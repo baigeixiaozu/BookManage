@@ -38,7 +38,7 @@
                     <a href="MarketingSystem/queryMarketingSystem.jsp">销售系统</a>
                 </li>
                 <li class="menu-list">
-                    <span id="message">库存</span>
+                    <span id="message">消息</span>
                     <ul class="menu-list-sub">
                         <li>
                             <a href="PurchasingSystem/queryorder.jsp" >查看消息</a>
