@@ -1,6 +1,7 @@
 package cn.bookmanage.dao;
 
 import cn.bookmanage.entity.Book;
+import cn.bookmanage.entity.Message;
 import cn.bookmanage.entity.User;
 import cn.bookmanage.entity.info;
 import cn.bookmanage.service.purchasing.PurchasingServices;
@@ -14,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MessageDao {
     public static ArrayList<info> fetch() {
@@ -194,8 +197,8 @@ public class MessageDao {
 
     /**
      * 发送一条消息
-     * @param sender    发送者id
-     * @param receiver  接收者id
+     * @param sender    发送者Level
+     * @param receiver  接收者Level
      * @param msg       消息内容
      * @return          自增id - [int]
      */
@@ -212,6 +215,34 @@ public class MessageDao {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public static List<Message> get(int receiver){
+        List<Message> list = new LinkedList<>();
+        String sql = "SELECT * FROM `bm_msg` WHERE receiver=?";
+        Connection connection = null;
+        try{
+            connection = JNDIUtils.getConnection();
+            Object[] p ={receiver};
+
+            ResultSet rs = JNDIUtils.executeQuery(connection, sql, p);
+            while (rs.next()){
+                list.add(new Message(){{
+                    setId(rs.getInt("msg_id"));
+                    setContent(rs.getString("content"));
+                    setTime(rs.getString("time"));
+                    setSender(rs.getInt("sender"));
+                    setReceiver(rs.getInt("receiver"));
+                    setReader_state(rs.getInt("read_state"));
+                }});
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
 }
