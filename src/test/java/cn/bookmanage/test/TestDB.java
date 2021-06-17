@@ -8,5 +8,7 @@ import org.junit.Test;
 public class TestDB {
     @Test
     public void testDB() {
+        float a = 2.345f;
+        System.out.println(a%0.01);
     }
 }

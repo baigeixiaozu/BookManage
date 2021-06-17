@@ -217,6 +217,11 @@ public class MessageDao {
         return 0;
     }
 
+    /**
+     * 获取指定等级的消息
+     * @param receiver 指定等级
+     * @return List<Message>
+     */
     public static List<Message> get(int receiver){
         List<Message> list = new LinkedList<>();
         String sql = "SELECT * FROM `bm_msg` WHERE receiver=?";

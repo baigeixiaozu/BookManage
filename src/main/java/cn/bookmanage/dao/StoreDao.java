@@ -6,7 +6,6 @@ import cn.bookmanage.utils.JNDIUtils;
 
 import javax.naming.NamingException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -158,5 +157,31 @@ public class StoreDao {
             add(finalTotal);
             add(books);
         }};
+    }
+
+    public static Book queryBook(int bookId){
+        Connection connection;
+        Book book = null;
+        try{
+            connection = JNDIUtils.getConnection();
+            String sql = "SELECT * FROM bm_book WHERE book_id=?";
+            Object[] p = {bookId};
+            ResultSet resultSet = JNDIUtils.executeQuery(connection, sql, p);
+            if (resultSet.next()){
+                book = new Book(){{
+                    setId(resultSet.getInt("book_id"));
+                    setName(resultSet.getString("book_name"));
+                    setAuthor(resultSet.getString("book_author"));
+                    setPublish(resultSet.getString("book_pub"));
+                    setIsbn(resultSet.getString("book_isbn"));
+                    setPrice(resultSet.getDouble("book_price"));
+                }};
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+        return book;
     }
 }

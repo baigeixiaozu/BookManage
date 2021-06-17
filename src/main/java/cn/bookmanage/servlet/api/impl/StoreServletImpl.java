@@ -1,5 +1,6 @@
 package cn.bookmanage.servlet.api.impl;
 
+import cn.bookmanage.dao.StoreDao;
 import cn.bookmanage.entity.Book;
 import cn.bookmanage.entity.StoreRecord;
 import cn.bookmanage.entity.User;
@@ -129,6 +130,21 @@ public class StoreServletImpl extends APIBaseServletImpl implements IStoreServle
         response.getWriter().print(JsonUtil.obj2String(ret));
     }
 
+    public void queryBookAction() throws IOException {
+
+        if (!checkUser()) {
+            throw new BaseException(403, "权限不足");
+        }
+        String bookIdStr = request.getParameter("bookId");
+        if(bookIdStr == null)throw new BaseException(500, "参数错误");
+        int bookId = Integer.parseInt(bookIdStr);
+        Book book = StoreDao.queryBook(bookId);
+
+        response.getWriter().print(JsonUtil.obj2String(new HashMap<String, Object>(){{
+            put("code", 2000);
+            put("book", book);
+        }}));
+    }
     private boolean checkUser(){
         User user = (User) request.getSession().getAttribute("user");
 
