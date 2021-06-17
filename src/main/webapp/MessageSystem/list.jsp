@@ -38,6 +38,7 @@
             <td>序号</td>
             <td>内容</td>
             <td>发送者</td>
+            <td>发送时间</td>
         </tr>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@
                 <td>${samp.id}</td>
                 <td>${samp.content}</td>
                 <td>${samp.senderName}</td>
+                <td>${samp.time}</td>
             </tr>
         </c:forEach>
         </tbody>

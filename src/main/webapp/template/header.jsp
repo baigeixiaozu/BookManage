@@ -41,7 +41,7 @@
                     <span id="MessageSystem">消息</span>
                     <ul class="menu-list-sub">
                         <li>
-                            <a href="MessageSystem/queryorder.jsp" >查看消息</a>
+                            <a href="MessageSystem/list.jsp" >查看消息</a>
                         </li>
                         <li>
                             <a href="MessageSystem/send_message.jsp" >发消息</a>
