@@ -120,15 +120,15 @@ public class BookDao {
             }
 
             //获取时间，写入表中
-            String log="insert into bm_out values(?,?,?,?)";
-            java.util.Date date=new java.util.Date();
+            String log="insert into bm_out values(?,?,?)";
+/*            java.util.Date date=new java.util.Date();
             long t=date.getTime();
-            java.sql.Date time=new java.sql.Date(t);
+            java.sql.Date time=new java.sql.Date(t);*/
             ps=conn.prepareStatement(log);
             ps.setInt(1,OutID+1);
             ps.setInt(2,ID);
             ps.setDouble(3,book.getCount());
-            ps.setDate(4,time);
+/*            ps.setDate(4,time);*/
             ps.execute();
 
             conn.close();
