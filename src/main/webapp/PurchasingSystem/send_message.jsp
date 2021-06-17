@@ -57,7 +57,7 @@
         response.sendRedirect("denied.jsp");
 %>
 <div class="container">
-    <form action="http://localhost:8080/BookManage_war_exploded/purchaseServlet" method="post">
+    <form action="purchaseServlet" method="post">
         <label for="content">内容</label>
         <input type="text" id="content" name="content" placeholder="content">
 
