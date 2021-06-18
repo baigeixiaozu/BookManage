@@ -5,12 +5,14 @@ import cn.bookmanage.entity.BookBuy;
 import cn.bookmanage.service.BookSystem.BookBuyService;
 import cn.bookmanage.utils.JNDIUtils;
 
-import java.sql.Connection;
+import java.io.InputStream;
+import java.io.Reader;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.sql.*;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -169,9 +171,16 @@ public class BookDao {
                 ps.setInt(2,b.getBookId());
                 ps.execute();
             }
+            String status="UPDATE bm_buy SET buy_verify_status=1";
+            PreparedStatement ps1=conn.prepareStatement(status);
+            /*ps=conn.prepareStatement(status);*/
+//            ps1.setInt(1,1);
+            ps1.executeUpdate();
+
             conn.close();
 
         }catch(Exception e){
+            e.printStackTrace();
             System.out.println(e);
         }
 
