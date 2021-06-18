@@ -13,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Order {
+    private int status;
     private long Order_id;
     private long id;
     private String name;

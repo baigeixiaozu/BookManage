@@ -85,6 +85,7 @@
             <td>出版社</td>
             <td>ISBN</td>
             <td>价格</td>
+            <td>订单情况</td>
         </tr>
         </thead>
         <tbody>
@@ -97,6 +98,7 @@
                 <td>${order.publish}</td>
                 <td>${order.isbn}</td>
                 <td>${order.price}</td>
+                <td><c:if test="${order.status==0}">未完成</c:if><c:if test="${order.status==1}">已完成</c:if></td>
                 <td style="background: #F3F7F9;border: none"><button onclick="deleteCart(${order.order_id})">删除</button></td>
             </tr>
         </c:forEach>

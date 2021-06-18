@@ -196,7 +196,7 @@ public class MarketingDao {
             rs.close();
 
             ps = null;
-            ps = conn.prepareStatement("select buy_id, bm_book.* from bm_buy join bm_book on bm_buy.book_id = bm_book.book_id where user_id = ? LIMIT ?,?");
+            ps = conn.prepareStatement("select buy_id, buy_verify_status, bm_book.* from bm_buy join bm_book on bm_buy.book_id = bm_book.book_id where user_id = ? LIMIT ?,?");
             ps.setInt(1,user.getId());
             ps.setInt(2,(page - 1) * count);
             ps.setInt(3, count);
@@ -205,6 +205,7 @@ public class MarketingDao {
             while (rs.next()) {
                 ResultSet finalRs = rs;
                 orders.add(new Order(){{
+                    setStatus(finalRs.getInt("buy_verify_status"));
                     setOrder_id(finalRs.getLong("buy_id"));
                     setId(finalRs.getLong("book_id"));
                     setName(finalRs.getString("book_name"));
