@@ -12,4 +12,7 @@ public class BookService {
             BookDao.BookOut(book);
         }
     }
+    public static void quickOut(){
+        BookDao.BookQuickOut();
+    }
 }

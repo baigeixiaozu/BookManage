@@ -86,16 +86,27 @@
 <script>
     var bookNeeded={};
     function BookOut(){
-        <c:forEach items="<%=book%>" var="b">
-        bookNeeded={"id":${b.bookId},"name":"","author":"","publish":"","isbn":${b.isbn},"price":"","count":${b.count}}
+/*
+        bookNeeded={"id":${b.bookId},"name":"","author":"","publish":"","isbn":"","price":"","count":${b.count}}
         $.ajax({
             type:"post",
             url:"BookServlet",
             data:JSON.stringify(bookNeeded),
             dataType:"json",
             contentType:"utf-8",
+        })*/
+     /* $.ajax({
+          type:"post",
+          url:"BookServlet",
+          data:"true",
+          dataType:"text",
+          contentType: "utf-8"
+      })*/
+        $.ajax({
+            type:"post",
+            url:"BookQuickOutServlet",
+            data:""
         })
-        </c:forEach>
         alert("出库成功");
     }
 </script>

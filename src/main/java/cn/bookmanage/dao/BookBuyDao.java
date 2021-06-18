@@ -14,14 +14,14 @@ public class BookBuyDao{
         List<BookBuy> list=new LinkedList<>();
         try {
             Connection conn = JNDIUtils.getConnection();
-            String statistics="select book_id,book_isbn,count(book_id) from bm_buy group by book_id";
+            String statistics="select book_id,count(book_id) from bm_buy group by book_id";
             PreparedStatement ps=conn.prepareStatement(statistics);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
                 list.add(new BookBuy(){{
                     setBookId(rs.getInt(1));
-                    setIsbn(rs.getString(2));
-                    setCount(rs.getInt(3));
+                  /*  setIsbn(rs.getString(2));*/
+                    setCount(rs.getInt(2));
                 }
 
                 });
