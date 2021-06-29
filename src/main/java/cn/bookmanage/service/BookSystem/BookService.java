@@ -4,12 +4,12 @@ import cn.bookmanage.dao.BookDao;
 import cn.bookmanage.entity.Book;
 
 public class BookService {
-    public static void BookIO(Book book){
+    public static String BookIO(Book book){
         if(!book.getName().equals("")){
-            BookDao.BookIn(book);
+            return BookDao.BookIn(book);
         }
         else{
-            BookDao.BookOut(book);
+            return BookDao.BookOut(book);
         }
     }
     public static void quickOut(){

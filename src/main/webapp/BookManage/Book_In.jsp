@@ -54,7 +54,7 @@
             var price=$("#price").val();
             var count=$("#number").val();
 
-            book={"name":name,"author":author,"publish":publish,"isbn":isbn,"price":price,"count":count};
+            book={"name":name,"author":author,"publish":publish,"isbn":isbn,"price":price,"count":count,};
 
             $.ajax({
                 type:"post",
@@ -62,11 +62,17 @@
                 data:JSON.stringify(book),
                 dataType:"json",
                 contentType:"utf-8",
-                success:function(){
-                    alert("入库成功！");
+                success:function(res){
+                    console.log(res);
+                    if(res=="true"){
+                        alert("入库成功！");
+                    }
+                    else{
+                        alert("入库失败！");
+                    }
                 },
                 error:function (){
-                    alert("入库成功!");
+                    alert("网络错误!请重试");
                 }
             })
         })
@@ -75,7 +81,7 @@
 <script>
     var OldBook={};
         function BookIn(Name,Isbn,Need){
-            OldBook={"name":Name,"author":"","publish":"","isbn":Isbn,"price":"","count":Need}
+            OldBook={"name":Name,"author":"","publish":"","isbn":Isbn,"price":"","count":Need,}
 
             $.ajax({
                 type:"post",
@@ -83,11 +89,12 @@
                 data:JSON.stringify(OldBook),
                 dataType:"json",
                 contentType:"utf-8",
-                success:function(){
+                success:function(res){
+                    console.log(res)
                     alert("入库成功！");
                 },
                 error:function (){
-                    alert("入库成功!");
+                    alert("网络错误!请重试");
                 }
             })
     }

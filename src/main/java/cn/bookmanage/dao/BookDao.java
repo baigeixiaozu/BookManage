@@ -19,7 +19,7 @@ import java.util.List;
 import static cn.bookmanage.dao.BookBuyDao.getCount;
 
 public class BookDao {
-    public static void BookIn(Book book){
+    public static String BookIn(Book book){
         try{
             Connection conn= JNDIUtils.getConnection();
             ResultSet rs=null;
@@ -89,15 +89,18 @@ public class BookDao {
                 ps.execute();
 
                 conn.close();
+
             }
 
         }
         catch(Exception e){
             System.out.println(e);
+            return "false";
         }
+        return "true";
     }
 
-    public static void BookOut(Book book){
+    public static String BookOut(Book book){
         try{
             Connection conn=JNDIUtils.getConnection();
             PreparedStatement ps=null;
@@ -145,7 +148,9 @@ public class BookDao {
         }
         catch(Exception e){
             System.out.println(e);
+            return "false";
         }
+        return "true";
     }
 
     public static void BookQuickOut(){

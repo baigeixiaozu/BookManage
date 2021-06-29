@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.Writer;
 
 @WebServlet(name="BookServlet",urlPatterns ={"/BookServlet"} )
 public class BookServlet extends HttpServlet{
@@ -29,6 +30,7 @@ public class BookServlet extends HttpServlet{
         ServletInputStream inputStream=servletRequest.getInputStream();
 
         String json=null;
+        String status="false";
         byte[] chunk=new byte[1024];
         while(inputStream.read(chunk)>0){ }
         json=new String(chunk, "utf-8");
@@ -36,7 +38,8 @@ public class BookServlet extends HttpServlet{
         ObjectMapper mapper=new ObjectMapper();
         Book book=mapper.readValue(json,Book.class);
 
-        BookService.BookIO(book);
-
+        status=BookService.BookIO(book);
+        //json=json+"\"status\":"+status;//这样处理，status两边就有双引号了
+        servletResponse.getWriter().write(status);
     }
 }
